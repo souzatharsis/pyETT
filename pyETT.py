@@ -7,7 +7,13 @@ import ett_parser
 
 
 class Match:
+    """
+    A class to represent a Match.
+    """
     class Round:
+        """
+        A class to represent a round of a Match.
+        """
         def __init__(self, round_attributes):
             self.id = round_attributes['id']
             self.round_number = round_attributes['round-number']
@@ -37,21 +43,27 @@ class Match:
 
         self.rounds = [self.Round(r) for r in match['rounds']]
 
-    def get_rounds_DataFrame(rounds) -> pd.DataFrame:
+    def get_rounds_dataframe(rounds: List['round']) -> pd.DataFrame:
+        """
+        Converts a list of rounds to a DataFrame
+        """
         return pd.DataFrame([vars(r) for r in rounds])
 
 
 class Player:
+    """
+    A class to represent a Player.
+    """
 
-    def __get_user(user_id):
-        return ett_parser.get_user(user_id)
+    def __get_user(self):
+        return ett_parser.get_user(self.id)
 
-    def __init__(self, user_id, player=None, legacy_API=False):
-        if player is None:
-            player = self.__get_user(user_id)
-            legacy_API = True
+    def __init__(self, user_id, player=None, legacy_api=False):
         self.id = user_id
-        self.name = player['user-name'] if legacy_API else player['username']
+        if player is None:
+            player = self.__get_user()
+            legacy_api = True
+        self.name = player['user-name'] if legacy_api else player['username']
         self.elo = player['elo']
         self.rank = player['rank']
         self.wins = player['wins']
@@ -63,21 +75,33 @@ class Player:
         return self.name
 
     def get_friends(self) -> List['Player']:
+        """
+        Return a player’s friends list
+        """
         if self.friends is None:
             res = ett_parser.get_friends(self.id)
-            self.friends = [Player(user_id=v['id'], player=v["attributes"], legacy_API=True) for v in res]
+            self.friends = [Player(user_id=v['id'], player=v["attributes"], legacy_api=True) for v in res]
         return self.friends
 
     def get_matches(self) -> List[Match]:
+        """
+        Return player’s matches. Currently, limited to the 25 most recent matches.
+        """
         if self.matches is None:
             res = ett_parser.get_matches(self.id)
             self.matches = [Match(match_id=v['id'], match=v["attributes"]) for v in res]
         return self.matches
 
-    def get_matches_DataFrame(self) -> pd.DataFrame:
+    def get_matches_dataframe(self) -> pd.DataFrame:
+        """
+        Return player’s matches in a pandas dataframe. Currently, limited to the 25 most recent matches.
+        """
         return pd.DataFrame([vars(m) for m in self.get_matches()])
 
     def get_elo_history(self) -> pd.Series:
+        """
+        Returns player’s elo score history.
+        """
         if self.elo_history is None:
             res = ett_parser.get_elo_history(self.id)
 
@@ -89,11 +113,18 @@ class Player:
 
 
 def user_search(username, perfect_match=False) -> List[Player]:
+    """
+    Returns a list of players whose name contains username, if perfect_match is False.
+    Otherwise, it returns a list of players whose usernames is a perfect match with username.
+    :param username: player's username
+    :param perfect_match: a flag used to indicate whether user name matching should be a perfect match
+    :return: A list of players
+    """
     res = ett_parser.user_search(username)
 
     users = [Player(user_id=v['id'],
                     player=v["attributes"],
-                    legacy_API=True) for v in res if (not perfect_match
+                    legacy_api=True) for v in res if (not perfect_match
                                                       or (perfect_match
                                                           and v["attributes"]['user-name']
                                                           == username))]
@@ -101,17 +132,30 @@ def user_search(username, perfect_match=False) -> List[Player]:
     return users
 
 
-def user_search_DataFrame(username) -> pd.DataFrame:
-    return pd.DataFrame([vars(u) for u in user_search(username)]).dropna(how='all', axis='columns')
+def user_search_dataframe(username, perfect_match=False) -> pd.DataFrame:
+    """
+    Returns a list of players whose name contains username, if perfect_match is False.
+    Otherwise, it returns a list of players whose usernames is a perfect match with username.
+    :param username: player's username
+    :param perfect_match: a flag used to indicate whether user name matching should be a perfect match
+    :return: A dataframe of players
+    """
+    return pd.DataFrame([vars(u) for u in user_search(username, perfect_match)]).dropna(how='all', axis='columns')
 
 
 def get_leaderboard() -> List[Player]:
+    """
+    Returns a list of players from the leaderboard. Currently, limited to Top 10 players.
+    """
     res = ett_parser.get_leaderboard()
     users = [user_search(v["username"], perfect_match=True)[0] for v in res]
     return users
 
 
-def get_leaderboard_DataFrame() -> pd.DataFrame:
+def get_leaderboard_dataframe() -> pd.DataFrame:
+    """
+    Returns a pandas dataframe with players from the leaderboard. Currently, limited to Top 10 players.
+    """
     lb = pd.DataFrame([vars(u) for u in get_leaderboard()]).dropna(how='all', axis='columns')
     # Overwriting rank as currently user API rank is lagged compared to the rank in leaderboard API
     lb['rank'] = lb.index
