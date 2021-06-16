@@ -116,9 +116,6 @@ def user_search(username, perfect_match=False) -> List[Player]:
     """
     Returns a list of players whose name contains username, if perfect_match is False.
     Otherwise, it returns a list of players whose usernames is a perfect match with username.
-    :param username: player's username
-    :param perfect_match: a flag used to indicate whether user name matching should be a perfect match
-    :return: A list of players
     """
     res = ett_parser.user_search(username)
 
@@ -136,9 +133,6 @@ def user_search_dataframe(username, perfect_match=False) -> pd.DataFrame:
     """
     Returns a list of players whose name contains username, if perfect_match is False.
     Otherwise, it returns a list of players whose usernames is a perfect match with username.
-    :param username: player's username
-    :param perfect_match: a flag used to indicate whether user name matching should be a perfect match
-    :return: A dataframe of players
     """
     return pd.DataFrame([vars(u) for u in user_search(username, perfect_match)]).dropna(how='all', axis='columns')
 
