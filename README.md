@@ -22,9 +22,9 @@ Python API for Eleven VR Table Tennis data.
 
 ### Documentation
 
-- [ ] Add Docstrings
+- [x] Add Docstrings
 - [ ] Add notebook demo
-- [ ] Add API official documentation
+- [x] Add API official documentation
 
 ### Code cleaning, refactoring, testing
 
