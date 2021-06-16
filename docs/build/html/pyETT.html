@@ -167,71 +167,6 @@
 <em class="property">class </em><code class="sig-prename descclassname">pyETT.</code><code class="sig-name descname">Match</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">match_id</span></em>, <em class="sig-param"><span class="n">match</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyETT.Match" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>A class to represent a Match.</p>
-<dl class="py attribute">
-<dt id="pyETT.Match.created_at">
-<code class="sig-name descname">created_at</code><a class="headerlink" href="#pyETT.Match.created_at" title="Permalink to this definition">¶</a></dt>
-<dd><p>start timestamp of the match (UTC)</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="pyETT.Match.id">
-<code class="sig-name descname">id</code><a class="headerlink" href="#pyETT.Match.id" title="Permalink to this definition">¶</a></dt>
-<dd><p>match id</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="pyETT.Match.ranked">
-<code class="sig-name descname">ranked</code><a class="headerlink" href="#pyETT.Match.ranked" title="Permalink to this definition">¶</a></dt>
-<dd><p>True if ranked match, False otherwise</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>bool</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="pyETT.Match.number_of_rounds">
-<code class="sig-name descname">number_of_rounds</code><a class="headerlink" href="#pyETT.Match.number_of_rounds" title="Permalink to this definition">¶</a></dt>
-<dd><p>Number of rounds of the match</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>int</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="pyETT.Match.state">
-<code class="sig-name descname">state</code><a class="headerlink" href="#pyETT.Match.state" title="Permalink to this definition">¶</a></dt>
-<dd><p>Match state value as follows:</p>
-<ul class="simple">
-<li><p>&lt; 0 | Pending State</p></li>
-<li><p>0 | In Progress</p></li>
-<li><p>1 | Completed</p></li>
-<li><p>2 | Cancelled</p></li>
-<li><p>3 | Expired</p></li>
-<li><p>4 | PendingCompletion</p></li>
-<li><p>5 | Reverted</p></li>
-<li><p>6 | Reversed</p></li>
-</ul>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>int</p>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="py class">
 <dt id="pyETT.Match.Round">
 <em class="property">class </em><code class="sig-name descname">Round</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">round_attributes</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyETT.Match.Round" title="Permalink to this definition">¶</a></dt>
@@ -243,17 +178,6 @@
 <dt id="pyETT.Match.get_rounds_dataframe">
 <code class="sig-name descname">get_rounds_dataframe</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="headerlink" href="#pyETT.Match.get_rounds_dataframe" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts a list of rounds to a DataFrame</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>rounds</strong> (<em>List</em><em>[</em><em>'Round'</em><em>]</em>) – A list of match rounds</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>rounds</strong> – A dataframe with one round per row</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>pd.DataFrame</p>
-</dd>
-</dl>
 </dd></dl>
 
 </dd></dl>
@@ -284,8 +208,7 @@
 <dl class="py method">
 <dt id="pyETT.Player.get_matches_dataframe">
 <code class="sig-name descname">get_matches_dataframe</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="headerlink" href="#pyETT.Player.get_matches_dataframe" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return player’s matches in a pandas dataframe.
-Currently, limited to the 25 most recent matches.</p>
+<dd><p>Return player’s matches in a pandas dataframe. Currently, limited to the 25 most recent matches.</p>
 </dd></dl>
 
 </dd></dl>
@@ -305,15 +228,21 @@ Currently, limited to the 25 most recent matches.</p>
 <dl class="py function">
 <dt id="pyETT.user_search">
 <code class="sig-prename descclassname">pyETT.</code><code class="sig-name descname">user_search</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">username</span></em>, <em class="sig-param"><span class="n">perfect_match</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="#pyETT.Player" title="pyETT.Player">pyETT.Player</a><span class="p">]</span><a class="headerlink" href="#pyETT.user_search" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a list of players whose name contains <cite>username</cite>, if <cite>perfect_match</cite> is False. Otherwise,
-it returns a list of players whose usernames is a perfect match with <cite>username</cite>.</p>
+<dd><p>Returns a list of players whose name contains username, if perfect_match is False.
+Otherwise, it returns a list of players whose usernames is a perfect match with username.
+:param username: player’s username
+:param perfect_match: a flag used to indicate whether user name matching should be a perfect match
+:return: A list of players</p>
 </dd></dl>
 
 <dl class="py function">
 <dt id="pyETT.user_search_dataframe">
-<code class="sig-prename descclassname">pyETT.</code><code class="sig-name descname">user_search_dataframe</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">username</span></em><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="headerlink" href="#pyETT.user_search_dataframe" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a pandas dataframe with players whose name contains <cite>username</cite>, if <cite>perfect_match</cite> is False. Otherwise,
-it returns players whose usernames is a perfect match with <cite>username</cite>.</p>
+<code class="sig-prename descclassname">pyETT.</code><code class="sig-name descname">user_search_dataframe</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">username</span></em>, <em class="sig-param"><span class="n">perfect_match</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="headerlink" href="#pyETT.user_search_dataframe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of players whose name contains username, if perfect_match is False.
+Otherwise, it returns a list of players whose usernames is a perfect match with username.
+:param username: player’s username
+:param perfect_match: a flag used to indicate whether user name matching should be a perfect match
+:return: A dataframe of players</p>
 </dd></dl>
 
 </div>
