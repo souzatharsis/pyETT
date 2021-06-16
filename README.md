@@ -21,7 +21,7 @@
 
 :heavy_check_mark: User search
 
-See TODO page.
+See TODO [page](https://github.com/souzatharsis/pyETT/blob/master/TODO.md).
 
 ## Documentation
 
