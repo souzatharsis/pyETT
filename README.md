@@ -27,6 +27,5 @@ See TODO [page](https://github.com/souzatharsis/pyETT/blob/master/TODO.md).
 
 Documentation for pyETT is located at https://pyett.readthedocs.io/en/latest/index.html.
 
-Licensed under [Attribution-NonCommercial-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-nc-sa/4.0/). 
 
 <img src="fig/by-nc-sa.png" width="20%">
