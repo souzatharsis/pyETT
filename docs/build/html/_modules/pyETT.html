@@ -160,14 +160,86 @@
 <span class="kn">import</span> <span class="nn">ett_parser</span>
 
 
+<div class="viewcode-block" id="Player"><a class="viewcode-back" href="../pyETT.html#pyETT.Player">[docs]</a><span class="k">class</span> <span class="nc">Player</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A class to represent a Player.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__get_user</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">ett_parser</span><span class="o">.</span><span class="n">get_user</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">player</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">legacy_api</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">user_id</span>
+        <span class="k">if</span> <span class="n">player</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">player</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_user</span><span class="p">()</span>
+            <span class="n">legacy_api</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">player</span><span class="p">[</span><span class="s1">&#39;user-name&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="n">legacy_api</span> <span class="k">else</span> <span class="n">player</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">elo</span> <span class="o">=</span> <span class="n">player</span><span class="p">[</span><span class="s1">&#39;elo&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rank</span> <span class="o">=</span> <span class="n">player</span><span class="p">[</span><span class="s1">&#39;rank&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wins</span> <span class="o">=</span> <span class="n">player</span><span class="p">[</span><span class="s1">&#39;wins&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">losses</span> <span class="o">=</span> <span class="n">player</span><span class="p">[</span><span class="s1">&#39;losses&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_online</span> <span class="o">=</span> <span class="n">player</span><span class="p">[</span><span class="s1">&#39;last-online&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">friends</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">matches</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">elo_history</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+
+<div class="viewcode-block" id="Player.get_friends"><a class="viewcode-back" href="../pyETT.html#pyETT.Player.get_friends">[docs]</a>    <span class="k">def</span> <span class="nf">get_friends</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="s1">&#39;Player&#39;</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a player’s friends list</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">friends</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">ett_parser</span><span class="o">.</span><span class="n">get_friends</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">friends</span> <span class="o">=</span> <span class="p">[</span><span class="n">Player</span><span class="p">(</span><span class="n">user_id</span><span class="o">=</span><span class="n">v</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span> <span class="n">player</span><span class="o">=</span><span class="n">v</span><span class="p">[</span><span class="s2">&quot;attributes&quot;</span><span class="p">],</span> <span class="n">legacy_api</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">res</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">friends</span></div>
+
+<div class="viewcode-block" id="Player.get_friends_dataframe"><a class="viewcode-back" href="../pyETT.html#pyETT.Player.get_friends_dataframe">[docs]</a>    <span class="k">def</span> <span class="nf">get_friends_dataframe</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a player’s friends list in a dataframe</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="nb">vars</span><span class="p">(</span><span class="n">u</span><span class="p">)</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_friends</span><span class="p">()])</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="s1">&#39;columns&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Player.get_matches"><a class="viewcode-back" href="../pyETT.html#pyETT.Player.get_matches">[docs]</a>    <span class="k">def</span> <span class="nf">get_matches</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="s1">&#39;Match&#39;</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return player’s matches. Currently, limited to the 25 most recent matches.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">matches</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">ett_parser</span><span class="o">.</span><span class="n">get_matches</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">matches</span> <span class="o">=</span> <span class="p">[</span><span class="n">Match</span><span class="p">(</span><span class="n">match_id</span><span class="o">=</span><span class="n">v</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span> <span class="n">match</span><span class="o">=</span><span class="n">v</span><span class="p">[</span><span class="s2">&quot;attributes&quot;</span><span class="p">])</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">res</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">matches</span></div>
+
+<div class="viewcode-block" id="Player.get_matches_dataframe"><a class="viewcode-back" href="../pyETT.html#pyETT.Player.get_matches_dataframe">[docs]</a>    <span class="k">def</span> <span class="nf">get_matches_dataframe</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return player’s matches in a pandas dataframe. Currently, limited to the 25 most recent matches.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="nb">vars</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_matches</span><span class="p">()])</span></div>
+
+<div class="viewcode-block" id="Player.get_elo_history"><a class="viewcode-back" href="../pyETT.html#pyETT.Player.get_elo_history">[docs]</a>    <span class="k">def</span> <span class="nf">get_elo_history</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns player’s elo score history.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">elo_history</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">ett_parser</span><span class="o">.</span><span class="n">get_elo_history</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">res</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">elo_history</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">dt</span><span class="p">,</span> <span class="n">elo</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="p">[(</span><span class="n">v</span><span class="p">[</span><span class="s1">&#39;attributes&#39;</span><span class="p">][</span><span class="s2">&quot;created-at&quot;</span><span class="p">],</span> <span class="n">v</span><span class="p">[</span><span class="s1">&#39;attributes&#39;</span><span class="p">][</span><span class="s2">&quot;current-elo&quot;</span><span class="p">])</span>
+                                          <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">res</span><span class="p">]))</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">elo_history</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;elo&#39;</span><span class="p">:</span> <span class="n">elo</span><span class="p">},</span> <span class="n">index</span><span class="o">=</span><span class="n">dt</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">elo_history</span></div></div>
+
 <div class="viewcode-block" id="Match"><a class="viewcode-back" href="../pyETT.html#pyETT.Match">[docs]</a><span class="k">class</span> <span class="nc">Match</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A class to represent a Match.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
 <div class="viewcode-block" id="Match.Round"><a class="viewcode-back" href="../pyETT.html#pyETT.Match.Round">[docs]</a>    <span class="k">class</span> <span class="nc">Round</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        A class to represent a round of a Match.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">round_attributes</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">round_attributes</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">round_number</span> <span class="o">=</span> <span class="n">round_attributes</span><span class="p">[</span><span class="s1">&#39;round-number&#39;</span><span class="p">]</span>
@@ -204,110 +276,55 @@
         <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="nb">vars</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">rounds</span><span class="p">])</span></div></div>
 
 
-<div class="viewcode-block" id="Player"><a class="viewcode-back" href="../pyETT.html#pyETT.Player">[docs]</a><span class="k">class</span> <span class="nc">Player</span><span class="p">:</span>
+<div class="viewcode-block" id="ETT"><a class="viewcode-back" href="../pyETT.html#pyETT.ETT">[docs]</a><span class="k">class</span> <span class="nc">ETT</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    A class to represent a Player.</span>
+<span class="sd">    A class to represent Eleven Table Tennis (ETT).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__get_user</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">ett_parser</span><span class="o">.</span><span class="n">get_user</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">leaderboard</span> <span class="o">=</span> <span class="kc">None</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">player</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">legacy_api</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">user_id</span>
-        <span class="k">if</span> <span class="n">player</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">player</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_user</span><span class="p">()</span>
-            <span class="n">legacy_api</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">player</span><span class="p">[</span><span class="s1">&#39;user-name&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="n">legacy_api</span> <span class="k">else</span> <span class="n">player</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">elo</span> <span class="o">=</span> <span class="n">player</span><span class="p">[</span><span class="s1">&#39;elo&#39;</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">rank</span> <span class="o">=</span> <span class="n">player</span><span class="p">[</span><span class="s1">&#39;rank&#39;</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">wins</span> <span class="o">=</span> <span class="n">player</span><span class="p">[</span><span class="s1">&#39;wins&#39;</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">losses</span> <span class="o">=</span> <span class="n">player</span><span class="p">[</span><span class="s1">&#39;losses&#39;</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">last_online</span> <span class="o">=</span> <span class="n">player</span><span class="p">[</span><span class="s1">&#39;last-online&#39;</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">friends</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">matches</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">elo_history</span> <span class="o">=</span> <span class="kc">None</span>
-
-    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
-
-<div class="viewcode-block" id="Player.get_friends"><a class="viewcode-back" href="../pyETT.html#pyETT.Player.get_friends">[docs]</a>    <span class="k">def</span> <span class="nf">get_friends</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="s1">&#39;Player&#39;</span><span class="p">]:</span>
+<div class="viewcode-block" id="ETT.user_search"><a class="viewcode-back" href="../pyETT.html#pyETT.ETT.user_search">[docs]</a>    <span class="k">def</span> <span class="nf">user_search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">perfect_match</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Player</span><span class="p">]:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return a player’s friends list</span>
+<span class="sd">        Returns a list of players whose name contains username, if perfect_match is False.</span>
+<span class="sd">        Otherwise, it returns a list of players whose usernames is a perfect match with username.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">friends</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">res</span> <span class="o">=</span> <span class="n">ett_parser</span><span class="o">.</span><span class="n">get_friends</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">friends</span> <span class="o">=</span> <span class="p">[</span><span class="n">Player</span><span class="p">(</span><span class="n">user_id</span><span class="o">=</span><span class="n">v</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span> <span class="n">player</span><span class="o">=</span><span class="n">v</span><span class="p">[</span><span class="s2">&quot;attributes&quot;</span><span class="p">],</span> <span class="n">legacy_api</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">res</span><span class="p">]</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">friends</span></div>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">ett_parser</span><span class="o">.</span><span class="n">user_search</span><span class="p">(</span><span class="n">username</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Player.get_matches"><a class="viewcode-back" href="../pyETT.html#pyETT.Player.get_matches">[docs]</a>    <span class="k">def</span> <span class="nf">get_matches</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Match</span><span class="p">]:</span>
+        <span class="n">users</span> <span class="o">=</span> <span class="p">[</span><span class="n">Player</span><span class="p">(</span><span class="n">user_id</span><span class="o">=</span><span class="n">v</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span>
+                             <span class="n">player</span><span class="o">=</span><span class="n">v</span><span class="p">[</span><span class="s2">&quot;attributes&quot;</span><span class="p">],</span>
+                             <span class="n">legacy_api</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">res</span> <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">perfect_match</span>
+                                                               <span class="ow">or</span> <span class="p">(</span><span class="n">perfect_match</span>
+                                                                   <span class="ow">and</span> <span class="n">v</span><span class="p">[</span><span class="s2">&quot;attributes&quot;</span><span class="p">][</span><span class="s1">&#39;user-name&#39;</span><span class="p">]</span>
+                                                                   <span class="o">==</span> <span class="n">username</span><span class="p">))]</span>
+
+        <span class="k">return</span> <span class="n">users</span></div>
+
+<div class="viewcode-block" id="ETT.user_search_dataframe"><a class="viewcode-back" href="../pyETT.html#pyETT.ETT.user_search_dataframe">[docs]</a>    <span class="k">def</span> <span class="nf">user_search_dataframe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">perfect_match</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return player’s matches. Currently, limited to the 25 most recent matches.</span>
+<span class="sd">        Returns a list of players whose name contains username, if perfect_match is False.</span>
+<span class="sd">        Otherwise, it returns a list of players whose usernames is a perfect match with username.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">matches</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">res</span> <span class="o">=</span> <span class="n">ett_parser</span><span class="o">.</span><span class="n">get_matches</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">matches</span> <span class="o">=</span> <span class="p">[</span><span class="n">Match</span><span class="p">(</span><span class="n">match_id</span><span class="o">=</span><span class="n">v</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span> <span class="n">match</span><span class="o">=</span><span class="n">v</span><span class="p">[</span><span class="s2">&quot;attributes&quot;</span><span class="p">])</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">res</span><span class="p">]</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">matches</span></div>
+        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="nb">vars</span><span class="p">(</span><span class="n">u</span><span class="p">)</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_search</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">perfect_match</span><span class="p">)])</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span>
+                                                                                                 <span class="n">axis</span><span class="o">=</span><span class="s1">&#39;columns&#39;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Player.get_matches_dataframe"><a class="viewcode-back" href="../pyETT.html#pyETT.Player.get_matches_dataframe">[docs]</a>    <span class="k">def</span> <span class="nf">get_matches_dataframe</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<div class="viewcode-block" id="ETT.get_leaderboard"><a class="viewcode-back" href="../pyETT.html#pyETT.ETT.get_leaderboard">[docs]</a>    <span class="k">def</span> <span class="nf">get_leaderboard</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Player</span><span class="p">]:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return player’s matches in a pandas dataframe. Currently, limited to the 25 most recent matches.</span>
+<span class="sd">        Returns a list of players from the leaderboard. Currently, limited to Top 10 players.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="nb">vars</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_matches</span><span class="p">()])</span></div>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">leaderboard</span>  <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">ett_parser</span><span class="o">.</span><span class="n">get_leaderboard</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">leaderboard</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">user_search</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="s2">&quot;username&quot;</span><span class="p">],</span> <span class="n">perfect_match</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">res</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">leaderboard</span></div>
 
-<div class="viewcode-block" id="Player.get_elo_history"><a class="viewcode-back" href="../pyETT.html#pyETT.Player.get_elo_history">[docs]</a>    <span class="k">def</span> <span class="nf">get_elo_history</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
+<div class="viewcode-block" id="ETT.get_leaderboard_dataframe"><a class="viewcode-back" href="../pyETT.html#pyETT.ETT.get_leaderboard_dataframe">[docs]</a>    <span class="k">def</span> <span class="nf">get_leaderboard_dataframe</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns player’s elo score history.</span>
+<span class="sd">        Returns a pandas dataframe with players from the leaderboard. Currently, limited to Top 10 players.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">elo_history</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">res</span> <span class="o">=</span> <span class="n">ett_parser</span><span class="o">.</span><span class="n">get_elo_history</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
-
-            <span class="n">dt</span><span class="p">,</span> <span class="n">elo</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="p">[(</span><span class="n">v</span><span class="p">[</span><span class="s1">&#39;attributes&#39;</span><span class="p">][</span><span class="s2">&quot;created-at&quot;</span><span class="p">],</span> <span class="n">v</span><span class="p">[</span><span class="s1">&#39;attributes&#39;</span><span class="p">][</span><span class="s2">&quot;current-elo&quot;</span><span class="p">])</span>
-                                      <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">res</span><span class="p">]))</span>
-
-            <span class="bp">self</span><span class="o">.</span><span class="n">elo_history</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">elo</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">dt</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">elo_history</span></div></div>
-
-
-<div class="viewcode-block" id="user_search"><a class="viewcode-back" href="../pyETT.html#pyETT.user_search">[docs]</a><span class="k">def</span> <span class="nf">user_search</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">perfect_match</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Player</span><span class="p">]:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Returns a list of players whose name contains username, if perfect_match is False.</span>
-<span class="sd">    Otherwise, it returns a list of players whose usernames is a perfect match with username.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">res</span> <span class="o">=</span> <span class="n">ett_parser</span><span class="o">.</span><span class="n">user_search</span><span class="p">(</span><span class="n">username</span><span class="p">)</span>
-
-    <span class="n">users</span> <span class="o">=</span> <span class="p">[</span><span class="n">Player</span><span class="p">(</span><span class="n">user_id</span><span class="o">=</span><span class="n">v</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span>
-                    <span class="n">player</span><span class="o">=</span><span class="n">v</span><span class="p">[</span><span class="s2">&quot;attributes&quot;</span><span class="p">],</span>
-                    <span class="n">legacy_api</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">res</span> <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">perfect_match</span>
-                                                      <span class="ow">or</span> <span class="p">(</span><span class="n">perfect_match</span>
-                                                          <span class="ow">and</span> <span class="n">v</span><span class="p">[</span><span class="s2">&quot;attributes&quot;</span><span class="p">][</span><span class="s1">&#39;user-name&#39;</span><span class="p">]</span>
-                                                          <span class="o">==</span> <span class="n">username</span><span class="p">))]</span>
-
-    <span class="k">return</span> <span class="n">users</span></div>
-
-
-<div class="viewcode-block" id="user_search_dataframe"><a class="viewcode-back" href="../pyETT.html#pyETT.user_search_dataframe">[docs]</a><span class="k">def</span> <span class="nf">user_search_dataframe</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">perfect_match</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Returns a list of players whose name contains username, if perfect_match is False.</span>
-<span class="sd">    Otherwise, it returns a list of players whose usernames is a perfect match with username.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="nb">vars</span><span class="p">(</span><span class="n">u</span><span class="p">)</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">user_search</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">perfect_match</span><span class="p">)])</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="s1">&#39;columns&#39;</span><span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="get_leaderboard"><a class="viewcode-back" href="../pyETT.html#pyETT.get_leaderboard">[docs]</a><span class="k">def</span> <span class="nf">get_leaderboard</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Player</span><span class="p">]:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Returns a list of players from the leaderboard. Currently, limited to Top 10 players.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">res</span> <span class="o">=</span> <span class="n">ett_parser</span><span class="o">.</span><span class="n">get_leaderboard</span><span class="p">()</span>
-    <span class="n">users</span> <span class="o">=</span> <span class="p">[</span><span class="n">user_search</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="s2">&quot;username&quot;</span><span class="p">],</span> <span class="n">perfect_match</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">res</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">users</span></div>
-
-
-<div class="viewcode-block" id="get_leaderboard_dataframe"><a class="viewcode-back" href="../pyETT.html#pyETT.get_leaderboard_dataframe">[docs]</a><span class="k">def</span> <span class="nf">get_leaderboard_dataframe</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Returns a pandas dataframe with players from the leaderboard. Currently, limited to Top 10 players.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">lb</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="nb">vars</span><span class="p">(</span><span class="n">u</span><span class="p">)</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">get_leaderboard</span><span class="p">()])</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="s1">&#39;columns&#39;</span><span class="p">)</span>
-    <span class="c1"># Overwriting rank as currently user API rank is lagged compared to the rank in leaderboard API</span>
-    <span class="n">lb</span><span class="p">[</span><span class="s1">&#39;rank&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lb</span><span class="o">.</span><span class="n">index</span>
-    <span class="k">return</span> <span class="n">lb</span></div>
+        <span class="n">lb</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="nb">vars</span><span class="p">(</span><span class="n">u</span><span class="p">)</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_leaderboard</span><span class="p">()])</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="s1">&#39;columns&#39;</span><span class="p">)</span>
+        <span class="c1"># Overwriting rank as currently user API rank is lagged compared to the rank in leaderboard API</span>
+        <span class="n">lb</span><span class="p">[</span><span class="s1">&#39;rank&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lb</span><span class="o">.</span><span class="n">index</span>
+        <span class="k">return</span> <span class="n">lb</span></div></div>
 </pre></div>
 
            </div>
