@@ -33,13 +33,16 @@
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="pyETT" href="modules.html" /> 
+    <link rel="next" title="Get Started" href="pyETT_demo.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -84,7 +87,11 @@
               
             
             
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+              <p class="caption"><span class="caption-text">User Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="pyETT_demo.html">Get Started</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Reference:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">pyETT</a></li>
 </ul>
@@ -154,12 +161,47 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="welcome-to-pyett-s-documentation">
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="welcome-to-pyett-s-documentation">
 <h1>Welcome to pyETT’s documentation!<a class="headerlink" href="#welcome-to-pyett-s-documentation" title="Permalink to this headline">¶</a></h1>
 <p>Python API for Eleven VR Table Tennis data.</p>
 <img alt="https://cdn.akamai.steamstatic.com/steam/apps/488310/capsule_616x353.jpg" src="https://cdn.akamai.steamstatic.com/steam/apps/488310/capsule_616x353.jpg" />
 <div class="toctree-wrapper compound">
-<p class="caption"><span class="caption-text">Contents:</span></p>
+<p class="caption"><span class="caption-text">User Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="pyETT_demo.html">Get Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pyETT_demo.html#Player-and-user-search">Player and user search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyETT_demo.html#Matches-and-rounds">Matches and rounds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyETT_demo.html#Friends-list,-leaderboard-and-elo-history">Friends list, leaderboard and elo history</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">API Reference:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">pyETT</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="ett_parser.html">ett_parser module</a></li>
@@ -176,6 +218,7 @@
 <li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
 <li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
 </ul>
+<p>Licensed under Attribution-NonCommercial-ShareAlike 4.0 International.</p>
 </div>
 
 
@@ -184,7 +227,7 @@
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="modules.html" class="btn btn-neutral float-right" title="pyETT" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="pyETT_demo.html" class="btn btn-neutral float-right" title="Get Started" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

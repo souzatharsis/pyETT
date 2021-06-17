@@ -9,11 +9,17 @@ Welcome to pyETT's documentation!
 Python API for Eleven VR Table Tennis data.
 
 .. image:: https://cdn.akamai.steamstatic.com/steam/apps/488310/capsule_616x353.jpg
-    
+   
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
-
+   :caption: User Documentation:
+   
+   pyETT_demo.ipynb
+       
+.. toctree::
+   :maxdepth: 2
+   :caption: API Reference:
+   
    modules
 
 Indices and tables
@@ -22,3 +28,5 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+
+Licensed under Attribution-NonCommercial-ShareAlike 4.0 International.
