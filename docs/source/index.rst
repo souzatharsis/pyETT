@@ -22,6 +22,11 @@ Python API for Eleven VR Table Tennis data.
    
    modules
 
+Collaborate
+==================
+
+Fork me at https://github.com/souzatharsis/pyETT.
+
 Indices and tables
 ==================
 
