@@ -1,6 +1,5 @@
 # pyETT: Python API client for Eleven VR Table Tennis data
-[![star this repo](https://githubbadges.com/star.svg?user=souzatharsis&repo=pyETT&style=default)](https://github.com/souzatharsis/pyETT)
-[![fork this repo](https://githubbadges.com/fork.svg?user=souzatharsis&repo=pyETT&style=default)](https://github.com/souzatharsis/pyETT/fork)
+[![Documentation Status](https://readthedocs.org/projects/pyett/badge/?version=latest)](https://pyett.readthedocs.io/en/latest/?badge=latest)
 [![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
 ![Eleven VR](https://cdn.akamai.steamstatic.com/steam/apps/488310/capsule_616x353.jpg)
