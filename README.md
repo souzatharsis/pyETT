@@ -8,5 +8,7 @@
 
 Documentation for pyETT is located at https://pyett.readthedocs.io/en/latest/index.html.
 
+## License
 
+Licensed under Attribution-NonCommercial-ShareAlike 4.0 International.
 <img src="fig/by-nc-sa.png" width="20%">
