@@ -12,7 +12,7 @@
 
 :heavy_check_mark: Add API official documentation
 
-- [ ] Add notebook demo
+:heavy_check_mark: Add notebook demo
 
 ### Code cleaning, refactoring, testing
 
