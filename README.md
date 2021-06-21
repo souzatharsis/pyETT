@@ -10,7 +10,7 @@
 
 ## Documentation
 
-Documentation for pyETT is located at https://pyett.readthedocs.io/en/latest/index.html.
+Documentation for pyETT is located at https://pyett.readthedocs.io/.
 
 ## Installation
 
