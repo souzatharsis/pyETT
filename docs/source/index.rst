@@ -22,6 +22,14 @@ Python API for Eleven VR Table Tennis data.
    
    modules
 
+
+Installation
+============
+
+**From PyPI** ::
+
+    $ pip install pyETT
+
 Collaborate
 ==================
 
