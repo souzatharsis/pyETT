@@ -1,4 +1,6 @@
 # pyETT: Python library for Eleven VR Table Tennis data
+
+[![Documentation Status](https://img.shields.io/pypi/v/pyETT)](https://pypi.org/project/pyETT/)
 [![Documentation Status](https://readthedocs.org/projects/pyett/badge/?version=latest)](https://pyett.readthedocs.io/en/latest/?badge=latest)
 [![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
