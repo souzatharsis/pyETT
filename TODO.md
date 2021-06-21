@@ -17,7 +17,8 @@
 ### Code cleaning, refactoring, testing
 
 :heavy_check_mark: Split code into parser and ETT objects handling
+:heavy_check_mark: Add unit tests
 
-- [ ] Add enum for states variables
 - [ ] Handle request exceptions
-- [ ] Add unit tests
+- [ ] Add enum for states variables
+
