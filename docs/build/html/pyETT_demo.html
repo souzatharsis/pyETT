@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Getting Started &mdash; pyETT 0.1.0 documentation</title>
+  <title>Getting Started &mdash; pyETT 0.1.3 documentation</title>
   
 
   
@@ -441,11 +441,11 @@ div.rendered_html tbody tr:hover {
 <h1>Getting Started<a class="headerlink" href="#Getting-Started" title="Permalink to this headline">¶</a></h1>
 <p>pyETT: Python library for Eleven VR Table Tennis data.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">pyETT</span>
+<span></span><span class="kn">from</span> <span class="nn">pyETT</span> <span class="kn">import</span> <span class="n">ett</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 </pre></div>
 </div>
@@ -458,8 +458,8 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">ett</span> <span class="o">=</span> <span class="n">pyETT</span><span class="o">.</span><span class="n">ETT</span><span class="p">()</span>
-<span class="n">ett</span><span class="o">.</span><span class="n">user_search_dataframe</span><span class="p">(</span><span class="s1">&#39;Highlander&#39;</span><span class="p">)</span>
+<span></span><span class="n">eleven</span> <span class="o">=</span> <span class="n">ett</span><span class="o">.</span><span class="n">ETT</span><span class="p">()</span>
+<span class="n">eleven</span><span class="o">.</span><span class="n">user_search_dataframe</span><span class="p">(</span><span class="s1">&#39;Highlander&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -640,13 +640,13 @@ div.rendered_html tbody tr:hover {
 </table>
 </div></div>
 </div>
-<p>Here, the function returns all players that contains the input username string ‘Highlander’. To search for a perfect match, we can pass the argument <code class="docutils literal notranslate"><span class="pre">perfect_match=True</span></code>:</p>
+<p>Here, the function returns all players that contain the input username string ‘Highlander’. To search for a perfect match, we can pass the argument <code class="docutils literal notranslate"><span class="pre">perfect_match=True</span></code>:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">ett</span><span class="o">.</span><span class="n">user_search_dataframe</span><span class="p">(</span><span class="s1">&#39;highlanderNJ&#39;</span><span class="p">,</span> <span class="n">perfect_match</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span></span><span class="n">eleven</span><span class="o">.</span><span class="n">user_search_dataframe</span><span class="p">(</span><span class="s1">&#39;highlanderNJ&#39;</span><span class="p">,</span> <span class="n">perfect_match</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -703,7 +703,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">:</span><span class="o">=</span><span class="n">pyETT</span><span class="o">.</span><span class="n">Player</span><span class="p">(</span><span class="mi">348353</span><span class="p">))</span>
+<span></span><span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="o">:=</span><span class="n">ett</span><span class="o">.</span><span class="n">Player</span><span class="p">(</span><span class="mi">348353</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -720,7 +720,7 @@ highlanderNJ
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;username:</span><span class="si">{p.name}</span><span class="se">\n</span><span class="s2"> elo:</span><span class="si">{p.elo}</span><span class="se">\n</span><span class="s2"> rank:</span><span class="si">{p.rank}</span><span class="se">\n</span><span class="s2"> wins:</span><span class="si">{p.wins}</span><span class="se">\n</span><span class="s2"> losses:</span><span class="si">{p.losses}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;username:</span><span class="si">{</span><span class="n">p</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="se">\n</span><span class="s2"> elo:</span><span class="si">{</span><span class="n">p</span><span class="o">.</span><span class="n">elo</span><span class="si">}</span><span class="se">\n</span><span class="s2"> rank:</span><span class="si">{</span><span class="n">p</span><span class="o">.</span><span class="n">rank</span><span class="si">}</span><span class="se">\n</span><span class="s2"> wins:</span><span class="si">{</span><span class="n">p</span><span class="o">.</span><span class="n">wins</span><span class="si">}</span><span class="se">\n</span><span class="s2"> losses:</span><span class="si">{</span><span class="n">p</span><span class="o">.</span><span class="n">losses</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -737,7 +737,7 @@ username:highlanderNJ
 
 </pre></div></div>
 </div>
-<p>We can see I have an elo number of 1980.5, which puts me ranked in number 2288 in the world with 457 ranked wins and 364 losses. That’s not entirely bad as the total number of active players is about 200,000 players!</p>
+<p>We can see I have an Elo number of 1980.5, which puts me ranked in number 2288 in the world with 457 ranked wins and 364 losses. That’s not entirely bad as the total number of active players is about 200,000 players!</p>
 </div>
 <div class="section" id="Matches-and-rounds">
 <h2>Matches and rounds<a class="headerlink" href="#Matches-and-rounds" title="Permalink to this headline">¶</a></h2>
@@ -869,13 +869,13 @@ username:highlanderNJ
 </table>
 </div></div>
 </div>
-<p>We can see that my latest match was against the player with username ‘pete_ed5’ and I won the match 2 x 0. In order to obtain the rounds information, we can use the method <code class="docutils literal notranslate"><span class="pre">get_rounds_dataframe</span></code> from the class <em>Match</em>, as follows:</p>
+<p>We can see that my latest match was against the player with username ‘pete_ed5’ and I won the match 2 x 0. In order to obtain the rounds information, we can use the method <code class="docutils literal notranslate"><span class="pre">get_rounds_dataframe</span></code> from the class <strong>Match</strong>, as follows:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">pyETT</span><span class="o">.</span><span class="n">Match</span><span class="o">.</span><span class="n">get_rounds_dataframe</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">rounds</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span></span><span class="n">ett</span><span class="o">.</span><span class="n">Match</span><span class="o">.</span><span class="n">get_rounds_dataframe</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">rounds</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -939,7 +939,7 @@ username:highlanderNJ
 </div>
 <div class="section" id="Friends-list,-leaderboard-and-elo-history">
 <h2>Friends list, leaderboard and elo history<a class="headerlink" href="#Friends-list,-leaderboard-and-elo-history" title="Permalink to this headline">¶</a></h2>
-<p>From the library, we can also obtain a player’s friends list with the method <code class="docutils literal notranslate"><span class="pre">get_friends()</span></code> from an object of the Class <em>Player</em>, which also has a corresponding method that returns a list of friends in a pandas dataframe:</p>
+<p>From the library, we can also obtain a player’s friends list with the method <code class="docutils literal notranslate"><span class="pre">get_friends()</span></code> from an object of the Class <strong>Player</strong>, which also has a corresponding method that returns a list of friends in a pandas dataframe:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[73]:
 </pre></div>
@@ -1046,7 +1046,7 @@ username:highlanderNJ
 </table>
 </div></div>
 </div>
-<p>I’m interested in comparing my elo score with my friends’. For that purpose, we can get a player’s elo history with the method <code class="docutils literal notranslate"><span class="pre">get_elo_history()</span></code>:</p>
+<p>I’m interested in comparing my Elo score with my friends’. For that purpose, we can get a player’s elo history with the method <code class="docutils literal notranslate"><span class="pre">get_elo_history()</span></code>:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[74]:
 </pre></div>
@@ -1108,13 +1108,13 @@ username:highlanderNJ
 </table>
 </div></div>
 </div>
-<p>Let’s now pull the elo history from 5 of my friends and put it all together in a dataframe including my own elo history and then plot them all:</p>
+<p>Let’s now pull the Elo history from 5 of my friends and put it all together in a dataframe including my own elo history and then plot them all:</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[56]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">functools</span> <span class="k">import</span> <span class="n">reduce</span>
+<span></span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span>
 
 <span class="n">n_friends</span> <span class="o">=</span> <span class="mi">5</span>
 
@@ -1286,14 +1286,14 @@ username:highlanderNJ
 <img alt="_images/pyETT_demo_25_1.png" src="_images/pyETT_demo_25_1.png" />
 </div>
 </div>
-<p>Overall, my friends are making some good progress. The player <em>Ping4Alzheimer</em> stands out as his elo rating has increased from 1500 to over 2000 in a relatively short period o time.</p>
-<p>Now let’s take a look at the leaderboard by using the method <code class="docutils literal notranslate"><span class="pre">get_leaderboard_dataframe()</span></code> from our <code class="docutils literal notranslate"><span class="pre">ett</span></code> object:</p>
+<p>Overall, my friends are making some good progress. The player <em>Ping4Alzheimer</em> stands out as his Elo rating has increased from 1500 to over 2000 in a relatively short period o time.</p>
+<p>Now let’s take a look at the leaderboard by using the method <code class="docutils literal notranslate"><span class="pre">get_leaderboard_dataframe()</span></code> from our <code class="docutils literal notranslate"><span class="pre">eleven</span></code> object:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[83]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">ett</span><span class="o">.</span><span class="n">get_leaderboard_dataframe</span><span class="p">()</span>
+<span></span><span class="n">eleven</span><span class="o">.</span><span class="n">get_leaderboard_dataframe</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1495,7 +1495,7 @@ username:highlanderNJ
 <img alt="_images/pyETT_demo_29_1.png" src="_images/pyETT_demo_29_1.png" />
 </div>
 </div>
-<p>Now, the dynamics are quite different compared to the one from my cohort of friends. At the top of the leaderboard we observe rapid elo growth across the board. The Top 2 player (PROTT_VR), for instance, moved from 1500 elo to an impresse 3000+ elo in a very short period of time. The number 1 player (yedat) has recently surpassed PROTT_VR also showing an amazing elo growth. I have added my elo evolution for comparison (the little blue curve at the bottom) to give a perspective on how competitive
+<p>The dynamics are quite different compared to the one from my cohort of friends. At the top of the leaderboard, we observe rapid Elo growth across the board. The Top 2 player (PROTT_VR), for instance, moved from a 1500 Elo to an impressive 3000+ Elo in a very short period of time. The number 1 player (yedat) has recently surpassed PROTT_VR also showing an amazing Elo growth. I have added my Elo evolution for comparison (the little blue curve at the bottom) to give a perspective on how competitive
 the game is at the highest level.</p>
 </div>
 </div>

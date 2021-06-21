@@ -17,7 +17,7 @@ Python API for Eleven VR Table Tennis data.
    pyETT_demo.ipynb
        
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :caption: API Reference:
    
    modules

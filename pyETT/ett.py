@@ -3,7 +3,7 @@
 from typing import List
 
 import pandas as pd
-import ett_parser
+from pyETT import ett_parser
 
 
 class Player:
