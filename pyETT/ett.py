@@ -11,6 +11,9 @@ class Player:
     A class to represent a Player.
     """
 
+    HOME = 0
+    AWAY = 1
+
     def __get_user(self):
         return ett_parser.get_user(self.id)
 
@@ -125,7 +128,7 @@ class Match:
         self.home_score = match['home-score']
         self.away_score = match['away-score']
 
-        home_player_index = 0 if match['players'][0]['team'] == 0 else 1
+        home_player_index = 0 if match['players'][0]['team'] == Player.HOME else 1
         self.home_player = Player(match['players'][home_player_index]["id"],
                                   match['players'][home_player_index])
         self.away_player = Player(match['players'][1 - home_player_index]["id"],
