@@ -1308,7 +1308,7 @@
    "outputs": [],
    "source": [
     "lb_elo = [f.get_elo_history().rename(columns={\"elo\":f.name}) for f in \n",
-    "               ett.get_leaderboard() if f.get_elo_history() is not None]\n",
+    "               eleven.get_leaderboard() if f.get_elo_history() is not None]\n",
     "\n",
     "lb_elo.append(p.get_elo_history().rename(columns={\"elo\":p.name}))\n",
     "\n",

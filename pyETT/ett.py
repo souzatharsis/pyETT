@@ -36,27 +36,43 @@ class Player:
         """
         if self.friends is None:
             res = ett_parser.get_friends(self.id)
-            self.friends = [Player(user_id=v['id'], player=v["attributes"], legacy_api=True) for v in res]
+            if not res:
+                self.friends = None
+            else:
+                self.friends = [
+                    Player(
+                        user_id=v['id'],
+                        player=v["attributes"],
+                        legacy_api=True) for v in res]
         return self.friends
 
     def get_friends_dataframe(self) -> pd.DataFrame:
         """
         Return a player’s friends list in a dataframe
         """
-        return pd.DataFrame([vars(u) for u in self.get_friends()]).dropna(how='all', axis='columns')
+        return pd.DataFrame([vars(u) for u in self.get_friends()]).dropna(
+            how='all', axis='columns')
 
     def get_matches(self) -> List['Match']:
         """
-        Return player’s matches. Currently, limited to the 25 most recent matches.
+        Return player’s matches.
+        Currently, limited to the 25 most recent matches.
         """
         if self.matches is None:
             res = ett_parser.get_matches(self.id)
-            self.matches = [Match(match_id=v['id'], match=v["attributes"]) for v in res]
+            if not res:
+                self.matches = None
+            else:
+                self.matches = [
+                    Match(
+                        match_id=v['id'],
+                        match=v["attributes"]) for v in res]
         return self.matches
 
     def get_matches_dataframe(self) -> pd.DataFrame:
         """
-        Return player’s matches in a pandas dataframe. Currently, limited to the 25 most recent matches.
+        Return player’s matches in a pandas dataframe.
+        Currently, limited to the 25 most recent matches.
         """
         return pd.DataFrame([vars(m) for m in self.get_matches()])
 
@@ -69,12 +85,14 @@ class Player:
             if not res:
                 self.elo_history = None
             else:
-                dt, elo = map(list, zip(*[(v['attributes']["created-at"], v['attributes']["current-elo"])
-                                          for v in res]))
+                dt, elo = map(list, zip(
+                    *[(v['attributes']["created-at"],
+                       v['attributes']["current-elo"]) for v in res]))
 
                 self.elo_history = pd.DataFrame({'elo': elo}, index=dt)
 
         return self.elo_history
+
 
 class Match:
     """
@@ -137,37 +155,52 @@ class ETT:
         """
         res = ett_parser.user_search(username)
 
-        users = [Player(user_id=v['id'],
-                             player=v["attributes"],
-                             legacy_api=True) for v in res if (not perfect_match
-                                                               or (perfect_match
-                                                                   and v["attributes"]['user-name']
-                                                                   == username))]
+        if not res:
+            users = None
+        else:
+            users = [
+                Player(
+                    user_id=v['id'],
+                    player=v["attributes"],
+                    legacy_api=True) for v in res if (
+                    not perfect_match or (
+                        perfect_match and v["attributes"]['user-name'] == username))]
 
         return users
 
-    def user_search_dataframe(self, username, perfect_match=False) -> pd.DataFrame:
+    def user_search_dataframe(
+            self,
+            username,
+            perfect_match=False) -> pd.DataFrame:
         """
         Returns a list of players whose name contains username, if perfect_match is False.
         Otherwise, it returns a list of players whose usernames is a perfect match with username.
         """
-        return pd.DataFrame([vars(u) for u in self.user_search(username, perfect_match)]).dropna(how='all',
-                                                                                                 axis='columns')
+        return pd.DataFrame([vars(u) for u in self.user_search(
+            username, perfect_match)]).dropna(how='all', axis='columns')
 
     def get_leaderboard(self) -> List[Player]:
         """
         Returns a list of players from the leaderboard. Currently, limited to Top 10 players.
         """
-        if self.leaderboard  is None:
+        if self.leaderboard is None:
             res = ett_parser.get_leaderboard()
-            self.leaderboard = [self.user_search(v["username"], perfect_match=True)[0] for v in res]
+            if not res:
+                self.leaderboard = None
+            else:
+                self.leaderboard = [
+                    self.user_search(
+                        v["username"],
+                        perfect_match=True)[0] for v in res]
         return self.leaderboard
 
     def get_leaderboard_dataframe(self) -> pd.DataFrame:
         """
         Returns a pandas dataframe with players from the leaderboard. Currently, limited to Top 10 players.
         """
-        lb = pd.DataFrame([vars(u) for u in self.get_leaderboard()]).dropna(how='all', axis='columns')
-        # Overwriting rank as currently user API rank is lagged compared to the rank in leaderboard API
+        lb = pd.DataFrame([vars(u) for u in self.get_leaderboard()]).dropna(
+            how='all', axis='columns')
+        # Overwriting rank as currently user API rank is lagged compared to the
+        # rank in leaderboard API
         lb['rank'] = lb.index
         return lb
