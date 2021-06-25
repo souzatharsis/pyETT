@@ -20,6 +20,7 @@
 
 :heavy_check_mark: Add unit tests
 
-- [ ] Handle request exceptions
-- [ ] Add enum for states variables
+:heavy_check_mark: Handle request exceptions
+
+:heavy_check_mark: Add enum for states variables
 
