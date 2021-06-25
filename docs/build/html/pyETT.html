@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>pyETT package &mdash; pyETT 0.1.3 documentation</title>
+  <title>pyETT package &mdash; pyETT 0.1.5 documentation</title>
   
 
   
@@ -261,6 +261,16 @@ Otherwise, it returns a list of players whose usernames is a perfect match with 
 <em class="property">class </em><code class="sig-prename descclassname">pyETT.ett.</code><code class="sig-name descname">Player</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user_id</span></em>, <em class="sig-param"><span class="n">player</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">legacy_api</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyETT/ett.html#Player"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyETT.ett.Player" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>A class to represent a Player.</p>
+<dl class="py attribute">
+<dt id="pyETT.ett.Player.AWAY">
+<code class="sig-name descname">AWAY</code><em class="property"> = 1</em><a class="headerlink" href="#pyETT.ett.Player.AWAY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="pyETT.ett.Player.HOME">
+<code class="sig-name descname">HOME</code><em class="property"> = 0</em><a class="headerlink" href="#pyETT.ett.Player.HOME" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
 <dt id="pyETT.ett.Player.get_elo_history">
 <code class="sig-name descname">get_elo_history</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="reference internal" href="_modules/pyETT/ett.html#Player.get_elo_history"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyETT.ett.Player.get_elo_history" title="Permalink to this definition">¶</a></dt>
@@ -281,14 +291,14 @@ Otherwise, it returns a list of players whose usernames is a perfect match with 
 
 <dl class="py method">
 <dt id="pyETT.ett.Player.get_matches">
-<code class="sig-name descname">get_matches</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="#pyETT.ett.Match" title="pyETT.ett.Match">pyETT.ett.Match</a><span class="p">]</span><a class="reference internal" href="_modules/pyETT/ett.html#Player.get_matches"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyETT.ett.Player.get_matches" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_matches</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">unranked</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="#pyETT.ett.Match" title="pyETT.ett.Match">pyETT.ett.Match</a><span class="p">]</span><a class="reference internal" href="_modules/pyETT/ett.html#Player.get_matches"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyETT.ett.Player.get_matches" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return player’s matches.
 Currently, limited to the 25 most recent matches.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="pyETT.ett.Player.get_matches_dataframe">
-<code class="sig-name descname">get_matches_dataframe</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="reference internal" href="_modules/pyETT/ett.html#Player.get_matches_dataframe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyETT.ett.Player.get_matches_dataframe" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_matches_dataframe</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">unranked</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="reference internal" href="_modules/pyETT/ett.html#Player.get_matches_dataframe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyETT.ett.Player.get_matches_dataframe" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return player’s matches in a pandas dataframe.
 Currently, limited to the 25 most recent matches.</p>
 </dd></dl>
@@ -315,7 +325,7 @@ Currently, limited to the 25 most recent matches.</p>
 
 <dl class="py function">
 <dt id="pyETT.ett_parser.get_matches">
-<code class="sig-prename descclassname">pyETT.ett_parser.</code><code class="sig-name descname">get_matches</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user_id</span></em><span class="sig-paren">)</span> &#x2192; List<a class="reference internal" href="_modules/pyETT/ett_parser.html#get_matches"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyETT.ett_parser.get_matches" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">pyETT.ett_parser.</code><code class="sig-name descname">get_matches</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user_id</span></em>, <em class="sig-param"><span class="n">unranked</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; List<a class="reference internal" href="_modules/pyETT/ett_parser.html#get_matches"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyETT.ett_parser.get_matches" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">

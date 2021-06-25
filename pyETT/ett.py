@@ -56,28 +56,28 @@ class Player:
         return pd.DataFrame([vars(u) for u in self.get_friends()]).dropna(
             how='all', axis='columns')
 
-    def get_matches(self) -> List['Match']:
+    def get_matches(self, unranked=False) -> List['Match']:
         """
         Return player’s matches.
         Currently, limited to the 25 most recent matches.
         """
         if self.matches is None:
-            res = ett_parser.get_matches(self.id)
+            res = ett_parser.get_matches(self.id, unranked)
             if not res:
                 self.matches = None
             else:
-                self.matches = [
+                matches = [
                     Match(
                         match_id=v['id'],
                         match=v["attributes"]) for v in res]
-        return self.matches
+        return matches
 
-    def get_matches_dataframe(self) -> pd.DataFrame:
+    def get_matches_dataframe(self, unranked=False) -> pd.DataFrame:
         """
         Return player’s matches in a pandas dataframe.
         Currently, limited to the 25 most recent matches.
         """
-        return pd.DataFrame([vars(m) for m in self.get_matches()])
+        return pd.DataFrame([vars(m) for m in self.get_matches(unranked)])
 
     def get_elo_history(self) -> pd.DataFrame:
         """

@@ -52,12 +52,13 @@ def get_friends(user_id) -> List:
     return request_friends(user_id).json()['data']
 
 
-def get_matches(user_id) -> List:
+def get_matches(user_id, unranked=False) -> List:
     @__exception_handler
-    def request_matches(user_id):
-        return requests.get(__url(f'accounts/{user_id}/matches'))
+    def request_matches(user_id, unranked):
+        unranked_str = 'true' if unranked else 'false'
+        return requests.get(__url(f'accounts/{user_id}/matches/?unranked={unranked_str}'))
 
-    return request_matches(user_id).json()['data']
+    return request_matches(user_id, unranked).json()['data']
 
 
 def get_elo_history(user_id) -> List:

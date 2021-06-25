@@ -23,6 +23,18 @@ class ETTTesting(TestCase):
         matches = player.get_matches_dataframe().head()
 
         self.assertTrue(matches.shape[0] > 0)
+    
+    def test_match_ranked(self):
+        player = ett.Player(348353)
+        matches = player.get_matches_dataframe(unranked=False).head()
+
+        self.assertTrue(matches.ranked.all())
+        
+    def test_match_unranked(self):
+        player = ett.Player(348353)
+        matches = player.get_matches_dataframe(unranked=True).head()
+
+        self.assertTrue(not(matches.ranked).any())
 
     #def test_match_rounds(self):
     #    player = ett.Player(348353)
