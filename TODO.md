@@ -4,7 +4,8 @@
 
 - [ ] Retrieve full user-matches history (parametrized)
 - [ ] Retrieve full leaderboard (parametrized)
-- [ ] Retrieve ranked and/or unranked matches (parametrized)
+
+:heavy_check_mark: Retrieve ranked and/or unranked matches (parametrized)
 
 ### Documentation
 
