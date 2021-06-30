@@ -59,7 +59,6 @@ class Player:
     def get_matches(self, unranked=False) -> List["Match"]:
         """
         Return player’s matches.
-        Currently, limited to the 25 most recent matches.
         """
         if self.matches is None:
             res = ett_parser.get_matches(self.id, unranked)
@@ -72,7 +71,6 @@ class Player:
     def get_matches_dataframe(self, unranked=False) -> pd.DataFrame:
         """
         Return player’s matches in a pandas dataframe.
-        Currently, limited to the 25 most recent matches.
         """
         return pd.DataFrame([vars(m) for m in self.get_matches(unranked)])
 
@@ -207,7 +205,7 @@ class ETT:
 
     def get_leaderboard_dataframe(self, num_players=10) -> pd.DataFrame:
         """
-        Returns a pandas dataframe with players from the leaderboard. Currently, limited to Top 10 players.
+        Returns a pandas dataframe with players from the leaderboard.
         """
         lb = pd.DataFrame([vars(u) for u in self.get_leaderboard(num_players)]).dropna(
             how="all", axis="columns"
