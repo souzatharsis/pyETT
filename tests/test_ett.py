@@ -24,24 +24,24 @@ class ETTTesting(TestCase):
 
         self.assertTrue(matches.shape[0] > 0)
 
-    #def test_match_ranked(self):
-    #    player = ett.Player(348353)
-    #    matches = player.get_matches_dataframe(unranked=False).head()
+    def test_match_ranked(self):
+        player = ett.Player(348353)
+        matches = player.get_matches_dataframe(unranked=False).head()
 
-    #    self.assertTrue(matches.ranked.all())
+        self.assertTrue(matches.ranked.all())
 
-    #def test_match_unranked(self):
-    #    player = ett.Player(348353)
-    #    matches = player.get_matches_dataframe(unranked=True).head()
+    def test_match_unranked(self):
+        player = ett.Player(348353)
+        matches = player.get_matches_dataframe(unranked=True).head()
 
-    #    self.assertTrue(not (matches.ranked).any())
+        self.assertTrue(not (matches.ranked).all())
 
-    #def test_match_rounds(self):
-    #   player = ett.Player(348353)
-    #   matches = player.get_matches_dataframe().head()
-    #   rounds = ett.Match.get_rounds_dataframe(matches.loc[matches['id'] == '9530774',].rounds[0])
+    def test_match_rounds(self):
+       player = ett.Player(348353)
+       matches = player.get_matches_dataframe().head()
+       rounds = ett.Match.get_rounds_dataframe(matches.loc[matches['id'] == '9866478',].rounds[0])
 
-    #   self.assertTrue(rounds.shape[0] > 0)
+       self.assertTrue(rounds.shape[0] > 0)
 
     def test_friends(self):
         player = ett.Player(348353)
