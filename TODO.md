@@ -1,11 +1,16 @@
 ## TODO
 
+### Modules
+
+- [ ] Add player analytics module
+
 ### Functions / params
 
-- [ ] Retrieve full user-matches history (parametrized)
-- [ ] Retrieve full leaderboard (parametrized)
+:heavy_check_mark: Retrieve full user-matches history (parametrized) async
 
-:heavy_check_mark: Retrieve ranked and/or unranked matches (parametrized)
+:heavy_check_mark: Retrieve full leaderboard (parametrized) async
+
+:heavy_check_mark: Retrieve ranked and/or unranked matches (parametrized) async
 
 ### Documentation
 
