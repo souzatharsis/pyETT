@@ -22,18 +22,18 @@ class Player:
         if player is None:
             player = self.__get_user()
             legacy_api = True
-        self.name = player['user-name'] if legacy_api else player['username']
-        self.elo = player['elo']
-        self.rank = player['rank']
-        self.wins = player['wins']
-        self.losses = player['losses']
-        self.last_online = player['last-online']
+        self.name = player["user-name"] if legacy_api else player["username"]
+        self.elo = player["elo"]
+        self.rank = player["rank"]
+        self.wins = player["wins"]
+        self.losses = player["losses"]
+        self.last_online = player["last-online"]
         self.friends = self.matches = self.elo_history = None
 
     def __str__(self):
         return self.name
 
-    def get_friends(self) -> List['Player']:
+    def get_friends(self) -> List["Player"]:
         """
         Return a player’s friends list
         """
@@ -43,10 +43,9 @@ class Player:
                 self.friends = None
             else:
                 self.friends = [
-                    Player(
-                        user_id=v['id'],
-                        player=v["attributes"],
-                        legacy_api=True) for v in res]
+                    Player(user_id=v["id"], player=v["attributes"], legacy_api=True)
+                    for v in res
+                ]
         return self.friends
 
     def get_friends_dataframe(self) -> pd.DataFrame:
@@ -54,9 +53,10 @@ class Player:
         Return a player’s friends list in a dataframe
         """
         return pd.DataFrame([vars(u) for u in self.get_friends()]).dropna(
-            how='all', axis='columns')
+            how="all", axis="columns"
+        )
 
-    def get_matches(self, unranked=False) -> List['Match']:
+    def get_matches(self, unranked=False) -> List["Match"]:
         """
         Return player’s matches.
         Currently, limited to the 25 most recent matches.
@@ -66,10 +66,7 @@ class Player:
             if not res:
                 self.matches = None
             else:
-                matches = [
-                    Match(
-                        match_id=v['id'],
-                        match=v["attributes"]) for v in res]
+                matches = [Match(match_id=v["id"], match=v["attributes"]) for v in res]
         return matches
 
     def get_matches_dataframe(self, unranked=False) -> pd.DataFrame:
@@ -88,11 +85,20 @@ class Player:
             if not res:
                 self.elo_history = None
             else:
-                dt, elo = map(list, zip(
-                    *[(v['attributes']["created-at"],
-                       v['attributes']["current-elo"]) for v in res]))
+                dt, elo = map(
+                    list,
+                    zip(
+                        *[
+                            (
+                                v["attributes"]["created-at"],
+                                v["attributes"]["current-elo"],
+                            )
+                            for v in res
+                        ]
+                    ),
+                )
 
-                self.elo_history = pd.DataFrame({'elo': elo}, index=dt)
+                self.elo_history = pd.DataFrame({"elo": elo}, index=dt)
 
         return self.elo_history
 
@@ -108,35 +114,39 @@ class Match:
         """
 
         def __init__(self, round_attributes):
-            self.id = round_attributes['id']
-            self.round_number = round_attributes['round-number']
-            self.state = round_attributes['state']
-            self.away_score = round_attributes['away-score']
-            self.home_score = round_attributes['home-score']
-            self.winner = round_attributes['winner']
-            self.created_at = round_attributes['created-at']
+            self.id = round_attributes["id"]
+            self.round_number = round_attributes["round-number"]
+            self.state = round_attributes["state"]
+            self.away_score = round_attributes["away-score"]
+            self.home_score = round_attributes["home-score"]
+            self.winner = round_attributes["winner"]
+            self.created_at = round_attributes["created-at"]
 
     def __init__(self, match_id, match):
-        self.created_at = match['created-at']
+        self.created_at = match["created-at"]
         self.id = match_id
 
-        self.ranked = match['ranked']
-        self.number_of_rounds = match['number-of-rounds']
-        self.state = match['state']
-        self.winning_team = match['winning-team']
-        self.losing_team = match['losing-team']
-        self.home_score = match['home-score']
-        self.away_score = match['away-score']
+        self.ranked = match["ranked"]
+        self.number_of_rounds = match["number-of-rounds"]
+        self.state = match["state"]
+        self.winning_team = match["winning-team"]
+        self.losing_team = match["losing-team"]
+        self.home_score = match["home-score"]
+        self.away_score = match["away-score"]
 
-        home_player_index = 0 if match['players'][0]['team'] == Player.HOME else 1
-        self.home_player = Player(match['players'][home_player_index]["id"],
-                                  match['players'][home_player_index])
-        self.away_player = Player(match['players'][1 - home_player_index]["id"],
-                                  match['players'][1 - home_player_index])
+        home_player_index = 0 if match["players"][0]["team"] == Player.HOME else 1
+        self.home_player = Player(
+            match["players"][home_player_index]["id"],
+            match["players"][home_player_index],
+        )
+        self.away_player = Player(
+            match["players"][1 - home_player_index]["id"],
+            match["players"][1 - home_player_index],
+        )
 
-        self.rounds = [self.Round(r) for r in match['rounds']]
+        self.rounds = [self.Round(r) for r in match["rounds"]]
 
-    def get_rounds_dataframe(rounds: List['round']) -> pd.DataFrame:
+    def get_rounds_dataframe(rounds: List["round"]) -> pd.DataFrame:
         """
         Converts a list of rounds to a DataFrame
         """
@@ -162,48 +172,47 @@ class ETT:
             users = None
         else:
             users = [
-                Player(
-                    user_id=v['id'],
-                    player=v["attributes"],
-                    legacy_api=True) for v in res if (
-                    not perfect_match or (
-                        perfect_match and v["attributes"]['user-name'] == username))]
+                Player(user_id=v["id"], player=v["attributes"], legacy_api=True)
+                for v in res
+                if (
+                    not perfect_match
+                    or (perfect_match and v["attributes"]["user-name"] == username)
+                )
+            ]
 
         return users
 
-    def user_search_dataframe(
-            self,
-            username,
-            perfect_match=False) -> pd.DataFrame:
+    def user_search_dataframe(self, username, perfect_match=False) -> pd.DataFrame:
         """
         Returns a list of players whose name contains username, if perfect_match is False.
         Otherwise, it returns a list of players whose usernames is a perfect match with username.
         """
-        return pd.DataFrame([vars(u) for u in self.user_search(
-            username, perfect_match)]).dropna(how='all', axis='columns')
+        return pd.DataFrame(
+            [vars(u) for u in self.user_search(username, perfect_match)]
+        ).dropna(how="all", axis="columns")
 
-    def get_leaderboard(self) -> List[Player]:
+    def get_leaderboard(self, num_players=10) -> List[Player]:
         """
         Returns a list of players from the leaderboard. Currently, limited to Top 10 players.
         """
         if self.leaderboard is None:
-            res = ett_parser.get_leaderboard()
+            res = ett_parser.get_leaderboard(num_players)
             if not res:
                 self.leaderboard = None
             else:
                 self.leaderboard = [
-                    self.user_search(
-                        v["username"],
-                        perfect_match=True)[0] for v in res]
+                    self.user_search(v["username"], perfect_match=True)[0] for v in res
+                ]
         return self.leaderboard
 
-    def get_leaderboard_dataframe(self) -> pd.DataFrame:
+    def get_leaderboard_dataframe(self, num_players=10) -> pd.DataFrame:
         """
         Returns a pandas dataframe with players from the leaderboard. Currently, limited to Top 10 players.
         """
-        lb = pd.DataFrame([vars(u) for u in self.get_leaderboard()]).dropna(
-            how='all', axis='columns')
+        lb = pd.DataFrame([vars(u) for u in self.get_leaderboard(num_players)]).dropna(
+            how="all", axis="columns"
+        )
         # Overwriting rank as currently user API rank is lagged compared to the
         # rank in leaderboard API
-        lb['rank'] = lb.index
+        lb["rank"] = lb.index
         return lb

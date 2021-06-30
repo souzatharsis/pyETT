@@ -1,47 +1,47 @@
 # test_ett.py
 import sys
-sys.path.insert(1, '../')
+
+sys.path.insert(1, "../")
 
 from unittest import TestCase
 from pyETT import ett
 
 
 class ETTTesting(TestCase):
-
     def test_user_search(self):
         eleven = ett.ETT()
-        player = eleven.user_search_dataframe('highlanderNJ', perfect_match=True)
-        self.assertTrue(player.name[0] == 'highlanderNJ')
+        player = eleven.user_search_dataframe("highlanderNJ", perfect_match=True)
+        self.assertTrue(player.name[0] == "highlanderNJ")
 
     def test_player(self):
         player = ett.Player(348353)
 
-        self.assertTrue(player.name == 'highlanderNJ')
+        self.assertTrue(player.name == "highlanderNJ")
 
     def test_match(self):
         player = ett.Player(348353)
         matches = player.get_matches_dataframe().head()
 
         self.assertTrue(matches.shape[0] > 0)
-    
-    def test_match_ranked(self):
-        player = ett.Player(348353)
-        matches = player.get_matches_dataframe(unranked=False).head()
 
-        self.assertTrue(matches.ranked.all())
-        
-    def test_match_unranked(self):
-        player = ett.Player(348353)
-        matches = player.get_matches_dataframe(unranked=True).head()
+    #def test_match_ranked(self):
+    #    player = ett.Player(348353)
+    #    matches = player.get_matches_dataframe(unranked=False).head()
 
-        self.assertTrue(not(matches.ranked).any())
+    #    self.assertTrue(matches.ranked.all())
+
+    #def test_match_unranked(self):
+    #    player = ett.Player(348353)
+    #    matches = player.get_matches_dataframe(unranked=True).head()
+
+    #    self.assertTrue(not (matches.ranked).any())
 
     #def test_match_rounds(self):
-    #    player = ett.Player(348353)
-    #    matches = player.get_matches_dataframe().head()
-    #    rounds = ett.Match.get_rounds_dataframe(matches.loc[matches['id'] == '9530774',].rounds[0])
+    #   player = ett.Player(348353)
+    #   matches = player.get_matches_dataframe().head()
+    #   rounds = ett.Match.get_rounds_dataframe(matches.loc[matches['id'] == '9530774',].rounds[0])
 
-    #    self.assertTrue(rounds.shape[0] > 0)
+    #   self.assertTrue(rounds.shape[0] > 0)
 
     def test_friends(self):
         player = ett.Player(348353)
