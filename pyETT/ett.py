@@ -191,7 +191,7 @@ class ETT:
 
     def get_leaderboard(self, num_players=10) -> List[Player]:
         """
-        Returns a list of players from the leaderboard. Currently, limited to Top 10 players.
+        Returns a list of players from the leaderboard.
         """
         if self.leaderboard is None:
             res = ett_parser.get_leaderboard(num_players)
