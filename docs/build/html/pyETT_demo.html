@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Getting Started &mdash; pyETT 0.1.5 documentation</title>
+  <title>Getting Started &mdash; pyETT 0.1.7 documentation</title>
   
 
   
@@ -441,7 +441,7 @@ div.rendered_html tbody tr:hover {
 <h1>Getting Started<a class="headerlink" href="#Getting-Started" title="Permalink to this headline">¶</a></h1>
 <p>pyETT: Python library for Eleven VR Table Tennis data.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -459,7 +459,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="n">eleven</span> <span class="o">=</span> <span class="n">ett</span><span class="o">.</span><span class="n">ETT</span><span class="p">()</span>
-<span class="n">eleven</span><span class="o">.</span><span class="n">user_search_dataframe</span><span class="p">(</span><span class="s1">&#39;Highlander&#39;</span><span class="p">)</span>
+<span class="n">eleven</span><span class="o">.</span><span class="n">user_search_dataframe</span><span class="p">(</span><span class="s1">&#39;Highlander&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -538,36 +538,6 @@ div.rendered_html tbody tr:hover {
     </tr>
     <tr>
       <th>4</th>
-      <td>348353</td>
-      <td>highlanderNJ</td>
-      <td>1980.5</td>
-      <td>2288</td>
-      <td>457</td>
-      <td>364</td>
-      <td>2021-06-16T21:48:07.262Z</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>174851</td>
-      <td>Highlander</td>
-      <td>1500.0</td>
-      <td>202898</td>
-      <td>0</td>
-      <td>0</td>
-      <td>2021-01-29T22:24:38.479Z</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>273705</td>
-      <td>vikinghighlander</td>
-      <td>1430.0</td>
-      <td>361738</td>
-      <td>1</td>
-      <td>13</td>
-      <td>2021-03-05T22:47:34.303Z</td>
-    </tr>
-    <tr>
-      <th>7</th>
       <td>384291</td>
       <td>highlander10</td>
       <td>1500.0</td>
@@ -575,66 +545,6 @@ div.rendered_html tbody tr:hover {
       <td>0</td>
       <td>0</td>
       <td>2021-04-16T22:18:26.874Z</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>349180</td>
-      <td>brHighlandeR</td>
-      <td>1480.0</td>
-      <td>377943</td>
-      <td>1</td>
-      <td>3</td>
-      <td>2021-04-02T14:52:05.130Z</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>388282</td>
-      <td>Fred THighlander</td>
-      <td>1500.0</td>
-      <td>330717</td>
-      <td>0</td>
-      <td>0</td>
-      <td>2021-03-13T22:19:41.219Z</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>281262</td>
-      <td>Highlander34</td>
-      <td>1500.0</td>
-      <td>241598</td>
-      <td>0</td>
-      <td>0</td>
-      <td>2021-01-19T01:31:25.454Z</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>342761</td>
-      <td>HighLandeR</td>
-      <td>1509.0</td>
-      <td>55912</td>
-      <td>4</td>
-      <td>0</td>
-      <td>2021-06-05T18:10:00.747Z</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>456783</td>
-      <td>Highlander75</td>
-      <td>1500.0</td>
-      <td>380346</td>
-      <td>0</td>
-      <td>0</td>
-      <td>2021-04-22T02:04:49.941Z</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>397168</td>
-      <td>OGHighlanderr</td>
-      <td>1500.0</td>
-      <td>149347</td>
-      <td>2</td>
-      <td>0</td>
-      <td>2021-03-24T05:57:07.701Z</td>
     </tr>
   </tbody>
 </table>
@@ -687,11 +597,11 @@ div.rendered_html tbody tr:hover {
       <th>0</th>
       <td>348353</td>
       <td>highlanderNJ</td>
-      <td>1980.5</td>
-      <td>2288</td>
-      <td>457</td>
-      <td>364</td>
-      <td>2021-06-16T21:48:07.262Z</td>
+      <td>2013.5</td>
+      <td>2042</td>
+      <td>475</td>
+      <td>372</td>
+      <td>2021-06-30T01:53:32.742Z</td>
     </tr>
   </tbody>
 </table>
@@ -730,25 +640,25 @@ highlanderNJ
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 username:highlanderNJ
- elo:1980.5
- rank:2288
- wins:457
- losses:364
+ elo:2013.5
+ rank:2042
+ wins:475
+ losses:372
 
 </pre></div></div>
 </div>
-<p>We can see I have an Elo number of 1980.5, which puts me ranked in number 2288 in the world with 457 ranked wins and 364 losses. That’s not entirely bad as the total number of active players is about 200,000 players!</p>
+<p>We can see I have an Elo number of 2013.5, which puts me ranked in number 2042 in the world with 475 ranked wins and 372 losses. That’s not entirely bad as the total number of users around 500,000 players!</p>
 </div>
 <div class="section" id="Matches-and-rounds">
 <h2>Matches and rounds<a class="headerlink" href="#Matches-and-rounds" title="Permalink to this headline">¶</a></h2>
-<p>Now that we have instantiated a <code class="docutils literal notranslate"><span class="pre">Player</span></code> object, we can obtain his matches using the method <code class="docutils literal notranslate"><span class="pre">get_matches()</span></code> or <code class="docutils literal notranslate"><span class="pre">get_matches_dataframe()</span></code> to obtain the data in a nice pandas dataframe.</p>
+<p>Now that we have instantiated a <code class="docutils literal notranslate"><span class="pre">Player</span></code> object, we can obtain his matches using the method <code class="docutils literal notranslate"><span class="pre">get_matches()</span></code> or <code class="docutils literal notranslate"><span class="pre">get_matches_dataframe()</span></code> to obtain the data in a nice pandas dataframe. These methods return ranked matches by default but you can pass the parameters <code class="docutils literal notranslate"><span class="pre">unranked=True</span></code> to obtain unranked matches.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">m</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">get_matches_dataframe</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-<span class="n">m</span>
+<span></span><span class="n">m</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">get_matches_dataframe</span><span class="p">()</span>
+<span class="n">m</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -792,38 +702,38 @@ username:highlanderNJ
   <tbody>
     <tr>
       <th>0</th>
-      <td>2021-06-14T21:33:02.826Z</td>
-      <td>9334404</td>
+      <td>2021-06-30T01:34:17.740Z</td>
+      <td>9837423</td>
       <td>True</td>
       <td>3</td>
       <td>1</td>
+      <td>0</td>
       <td>1</td>
-      <td>0</td>
-      <td>0</td>
       <td>2</td>
-      <td>pete_ed5</td>
+      <td>1</td>
       <td>highlanderNJ</td>
-      <td>[&lt;pyETT.Match.Round object at 0x7f283549c880&gt;,...</td>
+      <td>RandomPerson0504</td>
+      <td>[&lt;pyETT.ett.Match.Round object at 0x7fcc741398...</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>2021-06-14T21:29:40.751Z</td>
-      <td>9334315</td>
+      <td>2021-06-24T15:19:50.324Z</td>
+      <td>9652764</td>
       <td>True</td>
       <td>3</td>
       <td>1</td>
+      <td>0</td>
       <td>1</td>
-      <td>0</td>
-      <td>0</td>
       <td>2</td>
-      <td>pete_ed5</td>
+      <td>0</td>
       <td>highlanderNJ</td>
-      <td>[&lt;pyETT.Match.Round object at 0x7f283549c940&gt;,...</td>
+      <td>ZombieEngineerz8</td>
+      <td>[&lt;pyETT.ett.Match.Round object at 0x7fcc3cdcfe...</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>2021-06-14T21:26:32.527Z</td>
-      <td>9334230</td>
+      <td>2021-06-24T15:09:48.858Z</td>
+      <td>9652464</td>
       <td>True</td>
       <td>3</td>
       <td>1</td>
@@ -831,14 +741,14 @@ username:highlanderNJ
       <td>1</td>
       <td>2</td>
       <td>0</td>
-      <td>pete_ed5</td>
       <td>highlanderNJ</td>
-      <td>[&lt;pyETT.Match.Round object at 0x7f283549c730&gt;,...</td>
+      <td>mcstives</td>
+      <td>[&lt;pyETT.ett.Match.Round object at 0x7fcc3cdcf7...</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>2021-06-14T16:15:47.297Z</td>
-      <td>9326236</td>
+      <td>2021-06-23T22:33:16.914Z</td>
+      <td>9631520</td>
       <td>True</td>
       <td>3</td>
       <td>1</td>
@@ -846,30 +756,30 @@ username:highlanderNJ
       <td>1</td>
       <td>2</td>
       <td>1</td>
+      <td>ilyap</td>
       <td>highlanderNJ</td>
-      <td>FatCatPat69</td>
-      <td>[&lt;pyETT.Match.Round object at 0x7f283549c550&gt;,...</td>
+      <td>[&lt;pyETT.ett.Match.Round object at 0x7fcc3ce160...</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>2021-06-14T15:50:48.549Z</td>
-      <td>9325651</td>
+      <td>2021-06-23T22:26:44.411Z</td>
+      <td>9631342</td>
       <td>True</td>
       <td>3</td>
       <td>1</td>
+      <td>0</td>
       <td>1</td>
-      <td>0</td>
-      <td>0</td>
       <td>2</td>
-      <td>ThePongFather</td>
+      <td>0</td>
+      <td>LearnerForever</td>
       <td>highlanderNJ</td>
-      <td>[&lt;pyETT.Match.Round object at 0x7f283549cc40&gt;,...</td>
+      <td>[&lt;pyETT.ett.Match.Round object at 0x7fcc3ce164...</td>
     </tr>
   </tbody>
 </table>
 </div></div>
 </div>
-<p>We can see that my latest match was against the player with username ‘pete_ed5’ and I won the match 2 x 0. In order to obtain the rounds information, we can use the method <code class="docutils literal notranslate"><span class="pre">get_rounds_dataframe</span></code> from the class <strong>Match</strong>, as follows:</p>
+<p>We can see that my latest ranked match was against the player with username ‘RandomPerson0504’ and I won the match 2 x 1. In order to obtain the rounds information, we can use the method <code class="docutils literal notranslate"><span class="pre">get_rounds_dataframe</span></code> from the class <strong>Match</strong>, as follows:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
@@ -914,23 +824,33 @@ username:highlanderNJ
   <tbody>
     <tr>
       <th>0</th>
-      <td>20931563</td>
+      <td>22061114</td>
       <td>0</td>
       <td>0</td>
-      <td>11</td>
       <td>8</td>
-      <td>1</td>
-      <td>2021-06-14T21:35:29.753Z</td>
+      <td>11</td>
+      <td>0</td>
+      <td>2021-06-30T01:37:16.546Z</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>20931405</td>
+      <td>22061034</td>
       <td>0</td>
       <td>0</td>
       <td>11</td>
-      <td>8</td>
+      <td>7</td>
       <td>1</td>
-      <td>2021-06-14T21:33:02.826Z</td>
+      <td>2021-06-30T01:35:59.004Z</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>22060923</td>
+      <td>0</td>
+      <td>0</td>
+      <td>9</td>
+      <td>11</td>
+      <td>0</td>
+      <td>2021-06-30T01:34:17.740Z</td>
     </tr>
   </tbody>
 </table>
@@ -941,7 +861,7 @@ username:highlanderNJ
 <h2>Friends list, leaderboard and elo history<a class="headerlink" href="#Friends-list,-leaderboard-and-elo-history" title="Permalink to this headline">¶</a></h2>
 <p>From the library, we can also obtain a player’s friends list with the method <code class="docutils literal notranslate"><span class="pre">get_friends()</span></code> from an object of the Class <strong>Player</strong>, which also has a corresponding method that returns a list of friends in a pandas dataframe:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[73]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -950,7 +870,7 @@ username:highlanderNJ
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[73]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -979,33 +899,28 @@ username:highlanderNJ
       <th>wins</th>
       <th>losses</th>
       <th>last_online</th>
-      <th>elo_history</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>249045</td>
-      <td>Buttersmier</td>
-      <td>1886.0</td>
-      <td>3656</td>
-      <td>65</td>
-      <td>59</td>
-      <td>2021-06-15T21:30:17.883Z</td>
-      <td>elo
-2021-02-06T15...</td>
+      <td>35497</td>
+      <td>perseph</td>
+      <td>1626.0</td>
+      <td>13492</td>
+      <td>1208</td>
+      <td>1883</td>
+      <td>2021-06-20T22:50:59.471Z</td>
     </tr>
     <tr>
       <th>1</th>
       <td>431729</td>
       <td>JoeSixPaK</td>
-      <td>1700.5</td>
-      <td>8863</td>
-      <td>335</td>
-      <td>563</td>
-      <td>2021-06-16T02:40:18.813Z</td>
-      <td>elo
-2021-04-08T17...</td>
+      <td>1804.5</td>
+      <td>5542</td>
+      <td>389</td>
+      <td>654</td>
+      <td>2021-06-30T02:15:30.270Z</td>
     </tr>
     <tr>
       <th>2</th>
@@ -1016,31 +931,26 @@ username:highlanderNJ
       <td>0</td>
       <td>0</td>
       <td>2021-06-14T16:21:31.027Z</td>
-      <td>None</td>
     </tr>
     <tr>
       <th>3</th>
       <td>456082</td>
       <td>pete_ed5</td>
-      <td>1811.0</td>
-      <td>5170</td>
-      <td>98</td>
-      <td>91</td>
-      <td>2021-06-16T22:21:07.097Z</td>
-      <td>elo
-2021-04-21T20...</td>
+      <td>1796.0</td>
+      <td>5807</td>
+      <td>123</td>
+      <td>128</td>
+      <td>2021-06-29T22:45:05.229Z</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>468947</td>
-      <td>dargonfar</td>
-      <td>1499.0</td>
-      <td>436880</td>
-      <td>56</td>
-      <td>90</td>
-      <td>2021-06-16T15:24:29.938Z</td>
-      <td>elo
-2021-06-02T20...</td>
+      <td>249045</td>
+      <td>Buttersmier</td>
+      <td>1897.0</td>
+      <td>3601</td>
+      <td>80</td>
+      <td>74</td>
+      <td>2021-06-28T21:37:01.090Z</td>
     </tr>
   </tbody>
 </table>
@@ -1048,7 +958,7 @@ username:highlanderNJ
 </div>
 <p>I’m interested in comparing my Elo score with my friends’. For that purpose, we can get a player’s elo history with the method <code class="docutils literal notranslate"><span class="pre">get_elo_history()</span></code>:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[74]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1058,7 +968,7 @@ username:highlanderNJ
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[74]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -1110,7 +1020,7 @@ username:highlanderNJ
 </div>
 <p>Let’s now pull the Elo history from 5 of my friends and put it all together in a dataframe including my own elo history and then plot them all:</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[56]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1129,7 +1039,7 @@ username:highlanderNJ
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[54]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1138,7 +1048,7 @@ username:highlanderNJ
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[54]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -1160,49 +1070,55 @@ username:highlanderNJ
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>Buttersmier</th>
-      <th>JoeSixPaK</th>
-      <th>pete_ed5</th>
-      <th>dargonfar</th>
+      <th>Konowl77</th>
+      <th>belmont</th>
+      <th>Plipplopplip</th>
+      <th>olofaa</th>
+      <th>Kennatius</th>
       <th>highlanderNJ</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>2021-02-06T15:57:55.235Z</th>
+      <th>2020-12-31T01:14:04.984Z</th>
       <td>1500.0</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
-    </tr>
-    <tr>
-      <th>2021-02-06T16:03:26.589Z</th>
-      <td>1488.0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
       <td>NaN</td>
     </tr>
     <tr>
-      <th>2021-02-06T16:07:43.695Z</th>
-      <td>1482.0</td>
+      <th>2020-12-31T18:45:27.553Z</th>
+      <td>1493.0</td>
+      <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
     </tr>
     <tr>
-      <th>2021-02-06T16:09:59.066Z</th>
+      <th>2020-12-31T18:50:46.088Z</th>
       <td>1476.0</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
+      <td>NaN</td>
     </tr>
     <tr>
-      <th>2021-02-06T16:15:01.480Z</th>
-      <td>1473.0</td>
+      <th>2021-01-01T00:34:21.158Z</th>
+      <td>1468.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2021-01-01T02:38:08.062Z</th>
+      <td>1453.0</td>
+      <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
@@ -1215,54 +1131,60 @@ username:highlanderNJ
       <td>...</td>
       <td>...</td>
       <td>...</td>
+      <td>...</td>
     </tr>
     <tr>
-      <th>2021-06-16T21:48:09.534Z</th>
-      <td>1871.0</td>
-      <td>1705.5</td>
-      <td>1802.0</td>
-      <td>1507.0</td>
-      <td>1973.5</td>
+      <th>2021-06-30T01:34:17.740Z</th>
+      <td>1763.8</td>
+      <td>1907.2</td>
+      <td>1728.0</td>
+      <td>1506.0</td>
+      <td>1652.0</td>
+      <td>2005.5</td>
     </tr>
     <tr>
-      <th>2021-06-16T21:51:59.103Z</th>
-      <td>1871.0</td>
-      <td>1705.5</td>
-      <td>1819.0</td>
-      <td>1507.0</td>
-      <td>1973.5</td>
+      <th>2021-06-30T01:37:59.877Z</th>
+      <td>1763.8</td>
+      <td>1907.2</td>
+      <td>1733.0</td>
+      <td>1506.0</td>
+      <td>1652.0</td>
+      <td>2005.5</td>
     </tr>
     <tr>
-      <th>2021-06-16T21:56:39.187Z</th>
-      <td>1871.0</td>
-      <td>1705.5</td>
-      <td>1828.0</td>
-      <td>1507.0</td>
-      <td>1973.5</td>
+      <th>2021-06-30T01:44:09.865Z</th>
+      <td>1763.8</td>
+      <td>1907.2</td>
+      <td>1733.0</td>
+      <td>1506.0</td>
+      <td>1636.0</td>
+      <td>2005.5</td>
     </tr>
     <tr>
-      <th>2021-06-16T22:01:37.654Z</th>
-      <td>1871.0</td>
-      <td>1705.5</td>
-      <td>1833.0</td>
-      <td>1507.0</td>
-      <td>1973.5</td>
+      <th>2021-06-30T01:44:57.569Z</th>
+      <td>1763.8</td>
+      <td>1907.2</td>
+      <td>1736.0</td>
+      <td>1506.0</td>
+      <td>1636.0</td>
+      <td>2005.5</td>
     </tr>
     <tr>
-      <th>2021-06-16T22:10:05.077Z</th>
-      <td>1871.0</td>
-      <td>1705.5</td>
-      <td>1820.0</td>
-      <td>1507.0</td>
-      <td>1973.5</td>
+      <th>2021-06-30T01:49:24.921Z</th>
+      <td>1763.8</td>
+      <td>1907.2</td>
+      <td>1749.0</td>
+      <td>1506.0</td>
+      <td>1636.0</td>
+      <td>2005.5</td>
     </tr>
   </tbody>
 </table>
-<p>2181 rows × 5 columns</p>
+<p>4852 rows × 6 columns</p>
 </div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[80]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1271,12 +1193,12 @@ username:highlanderNJ
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[80]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f281ccb77c0&gt;
+&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fcc36dcd850&gt;
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -1286,10 +1208,10 @@ username:highlanderNJ
 <img alt="_images/pyETT_demo_25_1.png" src="_images/pyETT_demo_25_1.png" />
 </div>
 </div>
-<p>Overall, my friends are making some good progress. The player <em>Ping4Alzheimer</em> stands out as his Elo rating has increased from 1500 to over 2000 in a relatively short period o time.</p>
-<p>Now let’s take a look at the leaderboard by using the method <code class="docutils literal notranslate"><span class="pre">get_leaderboard_dataframe()</span></code> from our <code class="docutils literal notranslate"><span class="pre">eleven</span></code> object:</p>
+<p>Overall, my friends are making some good progress. Everyone seems to be improving over time.</p>
+<p>Now let’s take a look at the leaderboard by using the method <code class="docutils literal notranslate"><span class="pre">get_leaderboard_dataframe()</span></code> from our <code class="docutils literal notranslate"><span class="pre">eleven</span></code> object. By default, this method returns the top 10 players. You can pas</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[83]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1297,8 +1219,17 @@ username:highlanderNJ
 </pre></div>
 </div>
 </div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+https://www.elevenvr.club/leaderboards/?start=0
+https://www.elevenvr.club/leaderboards/?start=10
+</pre></div></div>
+</div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[83]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -1327,7 +1258,6 @@ username:highlanderNJ
       <th>wins</th>
       <th>losses</th>
       <th>last_online</th>
-      <th>elo_history</th>
     </tr>
   </thead>
   <tbody>
@@ -1335,13 +1265,11 @@ username:highlanderNJ
       <th>0</th>
       <td>385684</td>
       <td>yedat</td>
-      <td>3238.2</td>
+      <td>3258.2</td>
       <td>0</td>
-      <td>948</td>
+      <td>967</td>
       <td>258</td>
-      <td>2021-06-14T20:11:03.190Z</td>
-      <td>elo
-2021-03-12T18...</td>
+      <td>2021-06-28T19:21:18.464Z</td>
     </tr>
     <tr>
       <th>1</th>
@@ -1351,112 +1279,94 @@ username:highlanderNJ
       <td>1</td>
       <td>662</td>
       <td>119</td>
-      <td>2021-06-11T12:50:47.018Z</td>
-      <td>elo
-2021-02-17T19...</td>
+      <td>2021-06-22T19:37:25.710Z</td>
     </tr>
     <tr>
       <th>2</th>
       <td>234850</td>
       <td>lapoctopus90</td>
-      <td>3075.0</td>
+      <td>3087.1</td>
       <td>2</td>
-      <td>699</td>
-      <td>239</td>
-      <td>2021-06-15T16:33:14.924Z</td>
-      <td>elo
-2020-12-30T13...</td>
+      <td>712</td>
+      <td>246</td>
+      <td>2021-06-28T17:55:13.346Z</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>11002</td>
-      <td>twISTer1979</td>
-      <td>3039.0</td>
+      <td>289382</td>
+      <td>gselvas92</td>
+      <td>3034.0</td>
       <td>3</td>
-      <td>2393</td>
-      <td>919</td>
-      <td>2021-06-16T16:54:11.458Z</td>
-      <td>elo
-2020-03-08T10...</td>
+      <td>947</td>
+      <td>347</td>
+      <td>2021-06-28T18:12:51.853Z</td>
     </tr>
     <tr>
       <th>4</th>
       <td>372961</td>
       <td>sunking73</td>
-      <td>3033.5</td>
+      <td>2995.5</td>
       <td>4</td>
-      <td>597</td>
-      <td>248</td>
-      <td>2021-06-15T09:04:15.990Z</td>
-      <td>elo
-2021-03-06T14...</td>
+      <td>599</td>
+      <td>251</td>
+      <td>2021-06-20T11:44:49.214Z</td>
     </tr>
     <tr>
       <th>5</th>
       <td>428341</td>
       <td>NPiet</td>
-      <td>3005.0</td>
+      <td>2995.0</td>
       <td>5</td>
-      <td>976</td>
-      <td>192</td>
-      <td>2021-06-03T19:53:59.030Z</td>
-      <td>elo
-2021-04-06T17...</td>
+      <td>979</td>
+      <td>193</td>
+      <td>2021-06-25T07:22:35.945Z</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>3831</td>
-      <td>alexttbcn</td>
-      <td>2969.0</td>
+      <td>4410</td>
+      <td>wurstfriedl</td>
+      <td>2987.0</td>
       <td>6</td>
-      <td>1300</td>
-      <td>617</td>
-      <td>2021-06-16T15:18:39.784Z</td>
-      <td>elo
-2020-02-29T13...</td>
+      <td>2208</td>
+      <td>932</td>
+      <td>2021-06-28T14:49:11.031Z</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>289382</td>
-      <td>gselvas92</td>
-      <td>2966.0</td>
+      <td>3831</td>
+      <td>alexttbcn</td>
+      <td>2980.0</td>
       <td>7</td>
-      <td>899</td>
-      <td>337</td>
-      <td>2021-06-16T18:52:05.541Z</td>
-      <td>elo
-2021-01-23T16...</td>
+      <td>1303</td>
+      <td>618</td>
+      <td>2021-06-27T18:11:37.414Z</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>20585</td>
-      <td>fmwallin</td>
-      <td>2960.0</td>
+      <td>11002</td>
+      <td>twISTer1979</td>
+      <td>2978.6</td>
       <td>8</td>
-      <td>1553</td>
+      <td>2411</td>
       <td>931</td>
-      <td>2021-06-15T08:53:41.094Z</td>
-      <td>elo
-2020-03-25T19...</td>
+      <td>2021-06-28T17:13:18.551Z</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>4410</td>
-      <td>wurstfriedl</td>
-      <td>2956.0</td>
+      <td>20585</td>
+      <td>fmwallin</td>
+      <td>2960.0</td>
       <td>9</td>
-      <td>2201</td>
-      <td>932</td>
-      <td>2021-06-16T13:51:47.244Z</td>
-      <td>elo
-2020-03-22T13...</td>
+      <td>1553</td>
+      <td>931</td>
+      <td>2021-06-15T08:53:41.094Z</td>
     </tr>
   </tbody>
 </table>
 </div></div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[81]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1471,7 +1381,7 @@ username:highlanderNJ
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[82]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1480,12 +1390,12 @@ username:highlanderNJ
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[82]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f281c8ffd30&gt;
+&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fcc34838100&gt;
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">

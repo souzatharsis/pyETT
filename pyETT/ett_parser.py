@@ -48,18 +48,6 @@ def get_friends(user_id) -> List:
 
     return request_friends(user_id).json()["data"]
 
-
-def get_matches_legacy(user_id, unranked=False) -> List:
-    @__exception_handler
-    def request_matches(user_id, unranked):
-        unranked_str = "true" if unranked else "false"
-        return requests.get(
-            __url(f"accounts/{user_id}/matches/?unranked={unranked_str}")
-        )
-
-    return request_matches(user_id, unranked).json()["data"]
-
-
 def get_matches(user_id, unranked=False) -> List:
     async def request_matches(session, url):
         async with session.get(url) as resp:
@@ -118,7 +106,6 @@ def get_leaderboard(num_players=10):
                         + "?start="
                         + str(number * 10)
                 )
-                print(url)
                 tasks.append(asyncio.ensure_future(request_leaderboard(session, url)))
 
             lb = await asyncio.gather(*tasks)
