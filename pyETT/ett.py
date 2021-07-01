@@ -14,20 +14,28 @@ class Player:
     HOME = 0
     AWAY = 1
 
-    def __get_user(self):
-        return ett_parser.get_user(self.id)
+    def __get_user(user_id):
+        return ett_parser.get_user(user_id)
+
+    def __new__(cls, user_id, player=None, legacy_api=False):
+        if player is None:  # if no player is provided, try to get from the web api
+            player = cls.__get_user(user_id)
+            legacy_api = True
+            if player is None:  # returns None if player not found in the web api
+                return None
+        instance = object.__new__(cls)
+        instance.__init__(user_id, player, legacy_api)
+        return instance
 
     def __init__(self, user_id, player=None, legacy_api=False):
         self.id = user_id
-        if player is None:
-            player = self.__get_user()
-            legacy_api = True
-        self.name = player["user-name"] if legacy_api else player["username"]
-        self.elo = player["elo"]
-        self.rank = player["rank"]
-        self.wins = player["wins"]
-        self.losses = player["losses"]
-        self.last_online = player["last-online"]
+        if player is not None:
+            self.name = player["user-name"] if legacy_api else player["username"]
+            self.elo = player["elo"]
+            self.rank = player["rank"]
+            self.wins = player["wins"]
+            self.losses = player["losses"]
+            self.last_online = player["last-online"]
         self.friends = self.matches = self.elo_history = None
 
     def __str__(self):

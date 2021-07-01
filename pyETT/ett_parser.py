@@ -37,8 +37,12 @@ def get_user(user_id) -> List:
     @__exception_handler
     def request_user(user_id):
         return requests.get(__url(f"accounts/{user_id}/", legacy_api=True))
-
-    return request_user(user_id).json()["data"]["attributes"]
+    res = request_user(user_id)
+    if res is None:
+        print(f'Player with id{user_id} not found.')
+        return None
+    else:
+        return res.json()["data"]["attributes"]
 
 
 def get_friends(user_id) -> List:
