@@ -45,6 +45,8 @@ https://colab.research.google.com/drive/1nIJCtDUWQFtFPjIRs_7_yox6uK3V3SUC?usp=sh
 
 `float K = (float)(32f * (2f - 1f / (Math.Pow(2.0, (double)(n - 1)))));`
 
+Diffs compared to official Elo: different rounding, ignores manual elo change by mods, no 24 hour decay
+
 ### Player Analytics
 
 https://jzyrobert.github.io/eleven-stats/
