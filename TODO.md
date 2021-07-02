@@ -8,6 +8,8 @@
 
 - [ ] Add filter for match status
 
+- [ ] Find matches eligle for revertion 
+
 :heavy_check_mark: Retrieve full user-matches history (parametrized) async
 
 :heavy_check_mark: Retrieve full leaderboard (parametrized) async
