@@ -20,6 +20,8 @@
 
 :heavy_check_mark: Add notebook demo
 
+- [ ] Add Changelog
+
 ### Code cleaning, refactoring, testing
 
 :heavy_check_mark: Split code into parser and ETT objects handling
