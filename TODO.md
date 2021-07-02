@@ -2,9 +2,11 @@
 
 ### Modules
 
-- [ ] Add player analytics module
+- [ ] Add player analytics module; bump minor version to v0.2
 
 ### Functions / params
+
+- [ ] Add filter for match status
 
 :heavy_check_mark: Retrieve full user-matches history (parametrized) async
 
@@ -14,13 +16,13 @@
 
 ### Documentation
 
+- [ ] Add Changelog
+
 :heavy_check_mark: Add Docstrings
 
 :heavy_check_mark: Add API official documentation
 
 :heavy_check_mark: Add notebook demo
-
-- [ ] Add Changelog
 
 ### Code cleaning, refactoring, testing
 
@@ -31,4 +33,19 @@
 :heavy_check_mark: Handle request exceptions
 
 :heavy_check_mark: Add enum for states variables
+
+
+## Analytics Module
+
+### Cohort Analysis
+
+### Elo Analysis
+
+https://colab.research.google.com/drive/1nIJCtDUWQFtFPjIRs_7_yox6uK3V3SUC?usp=sharing
+
+`float K = (float)(32f * (2f - 1f / (Math.Pow(2.0, (double)(n - 1)))));`
+
+### Player Analytics
+
+https://jzyrobert.github.io/eleven-stats/
 
