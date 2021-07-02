@@ -37,11 +37,15 @@ class ETTTesting(TestCase):
         self.assertTrue(not (matches.ranked).all())
 
     def test_match_rounds(self):
-       player = ett.Player(348353)
-       matches = player.get_matches_dataframe().head()
-       rounds = ett.Match.get_rounds_dataframe(matches.loc[matches['id'] == '9866478',].rounds[0])
+        player = ett.Player(348353)
+        matches = player.get_matches_dataframe()
+        rounds = ett.Match.get_rounds_dataframe(
+            matches.loc[
+                matches["id"] == "9866478",
+            ].rounds.values[0]
+        )
 
-       self.assertTrue(rounds.shape[0] > 0)
+        self.assertTrue(rounds.shape[0] > 0)
 
     def test_friends(self):
         player = ett.Player(348353)
@@ -59,5 +63,11 @@ class ETTTesting(TestCase):
     def test_leaderboard(self):
         eleven = ett.ETT()
         leaderboard = eleven.get_leaderboard_dataframe()
+
+        self.assertTrue(leaderboard.shape[0] > 0)
+
+    def test_leaderboard_official_tournament(self):
+        eleven = ett.ETT()
+        leaderboard = eleven.get_leaderboard_official_tournament_dataframe()
 
         self.assertTrue(leaderboard.shape[0] > 0)

@@ -222,3 +222,10 @@ class ETT:
         # rank in leaderboard API
         lb["rank"] = lb.index
         return lb
+
+    def get_leaderboard_official_tournament_dataframe(self) -> pd.DataFrame:
+        """
+        Returns a pandas dataframe with the leaderboard of the Eleven official tournaments
+        available at http://lavadesignstudio.co.uk/eleven-rankings/.
+        """
+        return ett_parser.get_leaderboard_official_tournament()[0]
