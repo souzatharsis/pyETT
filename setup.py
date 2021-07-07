@@ -13,7 +13,7 @@ with open("LICENSE.md") as f:
 
 setup(
     name="pyETT",
-    version="0.1.10",
+    version="0.2.0",
     description="Python library for Eleven VR Table Tennis data",
     long_description=readme,
     long_description_content_type="text/markdown",
@@ -21,5 +21,13 @@ setup(
     url="https://pyett.readthedocs.io/",
     license=license,
     packages=find_packages(exclude=["contrib", "docs", "tests"]),
-    install_requires=["requests==2.22.0", "pandas==1.0.3", "nbsphinx==0.8.6", "aiohttp==3.6.2", "lxml"],
+    install_requires=[
+        requests==2.22.0,
+	pandas==1.3.0,
+	nbsphinx==0.8.6,
+	aiohttp==3.6.2,
+	lxml,
+	pandas_stubs==1.1.0.12,
+	nest_asyncio==1.5.1
+    ],
 )

@@ -1,6 +1,8 @@
-import nest_asyncio
+import nest_asyncio  # type: ignore
 
 import asyncio
+
+
 def get_or_create_eventloop():
     try:
         return asyncio.get_event_loop()

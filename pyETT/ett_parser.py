@@ -1,6 +1,6 @@
 # ett_parser.py
 
-from typing import List
+from typing import List, Optional, Iterator
 
 import requests
 import sys
@@ -42,7 +42,7 @@ def get_user(user_id) -> List:
     res = request_user(user_id)
     if res is None:
         print(f"Player with id{user_id} not found.")
-        return None
+        return [None]
     else:
         return res.json()["data"]["attributes"]
 
@@ -63,7 +63,9 @@ def get_matches(user_id, unranked=False) -> List:
 
     async def get_matches_async(user_id, unranked):
         unranked_str = "true" if unranked else "false"
-        async with aiohttp.ClientSession() as session:
+        async with aiohttp.ClientSession(
+            headers={"Connection": "keep-alive"}
+        ) as session:
             tasks = []
             res = requests.get(
                 __url(f"accounts/{user_id}/matches/?unranked={unranked_str}")
@@ -98,6 +100,59 @@ def get_elo_history(user_id) -> List:
         )
 
     return request_elo_history(user_id).json()["data"]
+
+
+def get_matchup(user_id1, user_id2) -> Iterator:
+    # TODO: webapi currently has a bug as it always returns 0 for home-score and away-score
+    @__exception_handler
+    def request_matchup(user_id1, user_id2):
+        return requests.get(__url(f"matchup/{user_id1}/{user_id2}", legacy_api=True))
+
+    r = request_matchup(user_id1, user_id2).json()
+    res = r["data"]
+    if len(res) == 0:
+        return []
+
+    rounds_data = r["included"]
+    rounds_indexed = {}
+
+    for r in rounds_data:
+        rounds_indexed[r["id"]] = r["attributes"]
+
+    for match_data in res:
+        match = match_data["attributes"]
+        match["winning-team"] = match.pop("winner")
+        match["losing-team"] = 1 - match["winning-team"]
+
+        # rounds data
+        rounds = match_data["relationships"]["rounds"]["data"]
+        num_rounds = len(rounds)
+        match["rounds"] = []
+
+        for i in range(num_rounds):
+            current_round = rounds_indexed[
+                match_data["relationships"]["rounds"]["data"][i]["id"]
+            ]
+            match["rounds"].append(current_round)
+            match["rounds"][i]["winner"] = (
+                0 if current_round["home-score"] > current_round["away-score"] else 1
+            )
+
+        # players data
+        match["players"] = []
+        home_away = ["home-team", "away-team"]
+        for i in range(2):
+            match["players"].append(match[home_away[i]][0])
+            match["players"][i]["username"] = match[home_away[i]][0]["UserName"]
+            match["players"][i]["elo"] = match[home_away[i]][0]["ELO"]
+            match["players"][i]["rank"] = match[home_away[i]][0]["Rank"]
+            match["players"][i]["wins"] = match[home_away[i]][0]["Wins"]
+            match["players"][i]["losses"] = match[home_away[i]][0]["Losses"]
+            match["players"][i]["last-online"] = match[home_away[i]][0]["LastOnline"]
+            match["players"][i]["team"] = i
+
+        match_data["attributes"] = match
+        yield match_data
 
 
 def get_leaderboard(num_players=10):
@@ -136,7 +191,7 @@ def get_leaderboard_official_tournament() -> List:
     res = request_leaderboard_official_tournament()
     if res is None:
         print(f"Official Tournament Leaderboard Not Found.")
-        return None
+        return [None]
     else:
         return pd.read_html(res.text)
 

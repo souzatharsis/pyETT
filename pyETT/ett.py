@@ -1,9 +1,12 @@
 # pyETT.py
 
-from typing import List
-
-import pandas as pd
 from pyETT import ett_parser
+from typing import List, Optional, Union
+from functools import reduce
+from itertools import combinations
+import pandas as pd
+
+pd.options.mode.chained_assignment = None
 
 
 class Player:
@@ -41,6 +44,15 @@ class Player:
     def __str__(self):
         return self.name
 
+    def __hash__(self):
+        return self.id
+
+    def __lt__(self, other):
+        return self.elo < other.elo
+
+    def __eq__(self, other):
+        return self.id == other.id
+
     def get_friends(self) -> List["Player"]:
         """
         Return a player’s friends list
@@ -64,23 +76,27 @@ class Player:
             how="all", axis="columns"
         )
 
-    def get_matches(self, unranked=False) -> List["Match"]:
+    def get_matches(self, unranked: bool = False) -> List["Match"]:
         """
         Return player’s matches.
         """
         if self.matches is None:
             res = ett_parser.get_matches(self.id, unranked)
             if not res:
-                self.matches = None
+                matches = []
             else:
                 matches = [Match(match_id=v["id"], match=v["attributes"]) for v in res]
+        else:
+            matches = self.matches
         return matches
 
     def get_matches_dataframe(self, unranked=False) -> pd.DataFrame:
         """
         Return player’s matches in a pandas dataframe.
         """
-        return pd.DataFrame([vars(m) for m in self.get_matches(unranked)])
+        return pd.DataFrame(
+            [vars(m) for m in self.get_matches(unranked) if m is not None]
+        )
 
     def get_elo_history(self) -> pd.DataFrame:
         """
@@ -152,11 +168,16 @@ class Match:
 
         self.rounds = [self.Round(r) for r in match["rounds"]]
 
-    def get_rounds_dataframe(rounds: List["round"]) -> pd.DataFrame:
+    # Keeping inside Match for organizational / readability purposes even though it's a static method.
+    def get_rounds_dataframe(rounds: List["Round"]) -> pd.DataFrame:  # type: ignore
+        """Converts a list of rounds to a DataFrame
+        Args:
+            rounds (List["Round"]): List of rounds.
+
+        Returns:
+            pd.DataFrame: Dataframe with rounds, one per row.
         """
-        Converts a list of rounds to a DataFrame
-        """
-        return pd.DataFrame([vars(r) for r in rounds])
+        return pd.DataFrame([vars(r) for r in rounds if r is not None])
 
 
 class ETT:
@@ -174,27 +195,35 @@ class ETT:
         """
         res = ett_parser.user_search(username)
 
-        if not res:
-            users = None
-        else:
-            users = [
+        return (
+            []
+            if not res
+            else [
                 Player(user_id=v["id"], player=v["attributes"], legacy_api=True)
                 for v in res
                 if (
-                    not perfect_match
-                    or (perfect_match and v["attributes"]["user-name"] == username)
+                    v is not None
+                    and (
+                        not perfect_match
+                        or (perfect_match and v["attributes"]["user-name"] == username)
+                    )
                 )
             ]
+        )
 
-        return users
-
-    def user_search_dataframe(self, username, perfect_match=False) -> pd.DataFrame:
+    def user_search_dataframe(
+        self, username: str, perfect_match: bool = False
+    ) -> pd.DataFrame:
         """
         Returns a list of players whose name contains username, if perfect_match is False.
         Otherwise, it returns a list of players whose usernames is a perfect match with username.
         """
         return pd.DataFrame(
-            [vars(u) for u in self.user_search(username, perfect_match)]
+            [
+                vars(u)
+                for u in self.user_search(username, perfect_match)
+                if u is not None
+            ]
         ).dropna(how="all", axis="columns")
 
     def get_leaderboard(self, num_players=10) -> List[Player]:
@@ -211,21 +240,222 @@ class ETT:
                 ]
         return self.leaderboard
 
-    def get_leaderboard_dataframe(self, num_players=10) -> pd.DataFrame:
+    def get_leaderboard_dataframe(self, num_players: int = 10) -> pd.DataFrame:
         """
         Returns a pandas dataframe with players from the leaderboard.
         """
-        lb = pd.DataFrame([vars(u) for u in self.get_leaderboard(num_players)]).dropna(
-            how="all", axis="columns"
-        )
+        lb = pd.DataFrame(
+            [vars(u) for u in self.get_leaderboard(num_players) if u is not None]
+        ).dropna(how="all", axis="columns")
         # Overwriting rank as currently user API rank is lagged compared to the
         # rank in leaderboard API
         lb["rank"] = lb.index
         return lb
 
-    def get_leaderboard_official_tournament_dataframe(self) -> pd.DataFrame:
+
+class Cohort:
+    """
+    A Class to represent a cohort of players
+    """
+
+    def __init__(self, players):
+        self.players = list(filter(None, players))
+        self.size = len(self.players)
+        self.matches = None
+
+    def players_dataframe(self):
+        """
+        Returns cohort's players in a dataframe
+        """
+        return pd.DataFrame([vars(u) for u in self.players if u is not None]).dropna(
+            how="all", axis="columns"
+        )
+
+    def get_elo_history(self):
+        """
+        Returns Elo history of the players in the cohort
+        """
+        cohort_elo = [
+            p.get_elo_history().rename(columns={"elo": p.name})
+            for p in self.players
+            if p.get_elo_history() is not None
+        ]
+
+        return reduce(
+            lambda df1, df2: pd.merge(
+                df1, df2, how="outer", left_index=True, right_index=True
+            ),
+            cohort_elo,
+        ).ffill(axis=0)
+
+    def get_matches(self, unranked: bool = False) -> List["Match"]:
+        """
+        Returns matches among players in the cohort
+        """
+
+        def get_matchup(matchup):
+            res = ett_parser.get_matchup(matchup[0].id, matchup[1].id)
+            if not res:
+                matches = []
+            else:
+                matches = [Match(match_id=v["id"], match=v["attributes"]) for v in res]
+            return matches
+
+        if self.matches is None:
+            players_matchup = combinations(self.players, 2)
+            players_matches = []
+            [
+                players_matches.extend(get_matchup(matchup))  # type: ignore
+                for matchup in players_matchup
+            ]
+            self.matches = players_matches
+
+        return self.matches
+
+    def get_matches_dataframe(self, unranked: bool = False) -> pd.DataFrame:
+        """
+        Returns a dataframe containing all matches of the players in the cohort.
+        """
+        return pd.DataFrame(
+            [vars(m) for m in self.get_matches(unranked) if m is not None]
+        )
+
+    def describe(self) -> pd.DataFrame:
+        """
+        Returns a dataframe with descriptive statistics of the players in the cohort considering only matches among themselves, such as win, losses and win rate.
+        Additional player specific attributes are added to the dataframe, such as name, elo and rank.
+
+        Returns:
+            pd.DataFrame: Players matchup stats in the cohort.
+        """
+        matches = self.get_matches_dataframe(self.players)
+
+        def matches_stats(matches, ranked):
+            ranked_label = ""
+            if ranked:
+                ranked_label += "_ranked"
+                matches = matches.loc[
+                    matches["ranked"],
+                ]
+
+            matches["winner"] = matches["home_player"]
+            matches.loc[matches["winning_team"] == 1, "winner"] = matches.loc[
+                matches["winning_team"] == 1, "away_player"
+            ]
+
+            wins = matches["winner"].value_counts()
+            num_matches = (
+                matches["home_player"].value_counts()
+                + matches["away_player"].value_counts()
+            )
+            losses = num_matches - wins
+            win_rate = (wins / num_matches) * 100
+
+            frame = {
+                ("num_matches" + ranked_label): num_matches,
+                ("wins" + ranked_label): wins,
+                ("losses" + ranked_label): losses,
+                ("win_rate" + ranked_label): win_rate,
+            }
+            return pd.DataFrame(frame).reset_index()
+
+        ranked_stats = matches_stats(matches, ranked=True)
+        all_stats = matches_stats(matches, ranked=False)
+        cohort_stats = (
+            ranked_stats.merge(all_stats)
+            .round(0)
+            .sort_values(by=["win_rate_ranked"], ascending=False)
+        )
+        cohort_stats["id"] = [p.id for p in cohort_stats["index"]]
+
+        return cohort_stats.merge(
+            self.players_dataframe()[["id", "elo", "rank"]],
+            left_on="id",
+            right_on="id",
+        ).drop(columns=["id"])
+
+
+class Tournament:
+    """
+    A Class to handle ETT official tournaments
+    """
+
+    def __init__(self, players):
+        self.players = list(filter(None, players))
+        self.size = len(self.players)
+
+    def get_official_tournament_leaderboard_dataframe(self) -> pd.DataFrame:
         """
         Returns a pandas dataframe with the leaderboard of the Eleven official tournaments
         available at http://lavadesignstudio.co.uk/eleven-rankings/.
         """
         return ett_parser.get_leaderboard_official_tournament()[0]
+
+    def qualify(self, elo_min: float, start: str, end: str) -> pd.DataFrame:
+        """Implements logic to enter or qualify to ETT's official monthly tournament.
+        Players with an Elo rating exceeding ``elo_min`` at any point
+        between ``start`` and ``end`` date have direct entry to the tournament.
+        Otherwise, they can enter a Qualifying Tournament to try and qualify.
+        This method returns a dataframe indicating which players have direct entry
+        or can qualify.
+
+        Args:
+            elo_min (float): Elo threshold to have direct entry to the Tournament.
+            start (str): Start date (YYYY-MM-DD)
+            end (str): End date (YYYY-MM-DD)
+
+        Returns:
+            pd.DataFrame: Data frame of players with the following information:
+                - mean: Player's mean Elo between ``start`` and ``end``
+                - min: Player's min Elo between ``start`` and `end``
+                - max: Player's max Elo between ``start`` and `end``
+                - direct_entry: Boolean indicating whether player have direct entry to the Tournament
+                - can_qualify: Boolean indicating whether player can enter Qualifying Tournament
+                - id: Player's id
+                - name: Player's username
+        """
+
+        p_with_elo = [p for p in self.players if p.get_elo_history() is not None]
+        ids = [p.id for p in p_with_elo]
+
+        # Players with elo history
+        players_elo = [
+            p.get_elo_history().rename(columns={"elo": p.name}) for p in p_with_elo
+        ]
+
+        group_elo_df = reduce(
+            lambda df1, df2: pd.merge(
+                df1, df2, how="outer", left_index=True, right_index=True
+            ),
+            players_elo,
+        ).ffill(axis=0)
+
+        monthly_stats = (
+            group_elo_df.loc[
+                (group_elo_df.index >= start) & (group_elo_df.index <= end)
+            ]
+            .describe()
+            .filter(like="m", axis=0)
+            .transpose()
+        )
+        monthly_stats["direct_entry"] = monthly_stats["max"] > elo_min
+        monthly_stats["can_qualify"] = monthly_stats["min"] <= elo_min
+        monthly_stats["id"] = [p.id for p in p_with_elo]
+        monthly_stats["name"] = [p.name for p in p_with_elo]
+
+        # Players with no elo history
+        p_without_elo = [p for p in self.players if p.get_elo_history() is None]
+
+        ids_without_elo = [p.id for p in p_without_elo]
+        n = len(ids_without_elo)
+        d = {
+            "mean": [1500] * n,
+            "min": [1500] * n,
+            "max": [1500] * n,
+            "direct_entry": [0] * n,
+            "can_qualify": [1] * n,
+            "id": ids_without_elo,
+            "name": [p.name for p in p_without_elo],
+        }
+
+        return pd.concat([monthly_stats, pd.DataFrame(data=d)], ignore_index=True)

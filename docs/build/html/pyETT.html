@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>pyETT package &mdash; pyETT 0.1.10 documentation</title>
+  <title>pyETT package &mdash; pyETT 0.2.0 documentation</title>
   
 
   
@@ -204,6 +204,52 @@
 <div class="section" id="module-pyETT.ett">
 <span id="pyett-ett-module"></span><h2>pyETT.ett module<a class="headerlink" href="#module-pyETT.ett" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
+<dt id="pyETT.ett.Cohort">
+<em class="property">class </em><code class="sig-prename descclassname">pyETT.ett.</code><code class="sig-name descname">Cohort</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">players</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyETT/ett.html#Cohort"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyETT.ett.Cohort" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A Class to represent a cohort of players</p>
+<dl class="py method">
+<dt id="pyETT.ett.Cohort.describe">
+<code class="sig-name descname">describe</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="reference internal" href="_modules/pyETT/ett.html#Cohort.describe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyETT.ett.Cohort.describe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dataframe with descriptive statistics of the players in the cohort considering only matches among themselves, such as win, losses and win rate.
+Additional player specific attributes are added to the dataframe, such as name, elo and rank.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Players matchup stats in the cohort.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyETT.ett.Cohort.get_elo_history">
+<code class="sig-name descname">get_elo_history</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyETT/ett.html#Cohort.get_elo_history"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyETT.ett.Cohort.get_elo_history" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns Elo history of the players in the cohort</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyETT.ett.Cohort.get_matches">
+<code class="sig-name descname">get_matches</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">unranked</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="#pyETT.ett.Match" title="pyETT.ett.Match">pyETT.ett.Match</a><span class="p">]</span><a class="reference internal" href="_modules/pyETT/ett.html#Cohort.get_matches"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyETT.ett.Cohort.get_matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns matches among players in the cohort</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyETT.ett.Cohort.get_matches_dataframe">
+<code class="sig-name descname">get_matches_dataframe</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">unranked</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="reference internal" href="_modules/pyETT/ett.html#Cohort.get_matches_dataframe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyETT.ett.Cohort.get_matches_dataframe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dataframe containing all matches of the players in the cohort.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyETT.ett.Cohort.players_dataframe">
+<code class="sig-name descname">players_dataframe</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyETT/ett.html#Cohort.players_dataframe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyETT.ett.Cohort.players_dataframe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns cohort’s players in a dataframe</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt id="pyETT.ett.ETT">
 <em class="property">class </em><code class="sig-prename descclassname">pyETT.ett.</code><code class="sig-name descname">ETT</code><a class="reference internal" href="_modules/pyETT/ett.html#ETT"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyETT.ett.ETT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
@@ -216,15 +262,8 @@
 
 <dl class="py method">
 <dt id="pyETT.ett.ETT.get_leaderboard_dataframe">
-<code class="sig-name descname">get_leaderboard_dataframe</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">num_players</span><span class="o">=</span><span class="default_value">10</span></em><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="reference internal" href="_modules/pyETT/ett.html#ETT.get_leaderboard_dataframe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyETT.ett.ETT.get_leaderboard_dataframe" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_leaderboard_dataframe</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">num_players</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">10</span></em><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="reference internal" href="_modules/pyETT/ett.html#ETT.get_leaderboard_dataframe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyETT.ett.ETT.get_leaderboard_dataframe" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a pandas dataframe with players from the leaderboard.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="pyETT.ett.ETT.get_leaderboard_official_tournament_dataframe">
-<code class="sig-name descname">get_leaderboard_official_tournament_dataframe</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="reference internal" href="_modules/pyETT/ett.html#ETT.get_leaderboard_official_tournament_dataframe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyETT.ett.ETT.get_leaderboard_official_tournament_dataframe" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a pandas dataframe with the leaderboard of the Eleven official tournaments
-available at <a class="reference external" href="http://lavadesignstudio.co.uk/eleven-rankings/">http://lavadesignstudio.co.uk/eleven-rankings/</a>.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -236,7 +275,7 @@ Otherwise, it returns a list of players whose usernames is a perfect match with 
 
 <dl class="py method">
 <dt id="pyETT.ett.ETT.user_search_dataframe">
-<code class="sig-name descname">user_search_dataframe</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">username</span></em>, <em class="sig-param"><span class="n">perfect_match</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="reference internal" href="_modules/pyETT/ett.html#ETT.user_search_dataframe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyETT.ett.ETT.user_search_dataframe" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">user_search_dataframe</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">username</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">perfect_match</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="reference internal" href="_modules/pyETT/ett.html#ETT.user_search_dataframe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyETT.ett.ETT.user_search_dataframe" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a list of players whose name contains username, if perfect_match is False.
 Otherwise, it returns a list of players whose usernames is a perfect match with username.</p>
 </dd></dl>
@@ -258,7 +297,17 @@ Otherwise, it returns a list of players whose usernames is a perfect match with 
 <dl class="py method">
 <dt id="pyETT.ett.Match.get_rounds_dataframe">
 <code class="sig-name descname">get_rounds_dataframe</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="reference internal" href="_modules/pyETT/ett.html#Match.get_rounds_dataframe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyETT.ett.Match.get_rounds_dataframe" title="Permalink to this definition">¶</a></dt>
-<dd><p>Converts a list of rounds to a DataFrame</p>
+<dd><p>Converts a list of rounds to a DataFrame
+:param rounds: List of rounds.
+:type rounds: List[“Round”]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Dataframe with rounds, one per row.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>pd.DataFrame</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -298,7 +347,7 @@ Otherwise, it returns a list of players whose usernames is a perfect match with 
 
 <dl class="py method">
 <dt id="pyETT.ett.Player.get_matches">
-<code class="sig-name descname">get_matches</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">unranked</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="#pyETT.ett.Match" title="pyETT.ett.Match">pyETT.ett.Match</a><span class="p">]</span><a class="reference internal" href="_modules/pyETT/ett.html#Player.get_matches"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyETT.ett.Player.get_matches" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_matches</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">unranked</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="#pyETT.ett.Match" title="pyETT.ett.Match">pyETT.ett.Match</a><span class="p">]</span><a class="reference internal" href="_modules/pyETT/ett.html#Player.get_matches"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyETT.ett.Player.get_matches" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return player’s matches.</p>
 </dd></dl>
 
@@ -306,6 +355,58 @@ Otherwise, it returns a list of players whose usernames is a perfect match with 
 <dt id="pyETT.ett.Player.get_matches_dataframe">
 <code class="sig-name descname">get_matches_dataframe</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">unranked</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="reference internal" href="_modules/pyETT/ett.html#Player.get_matches_dataframe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyETT.ett.Player.get_matches_dataframe" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return player’s matches in a pandas dataframe.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="pyETT.ett.Tournament">
+<em class="property">class </em><code class="sig-prename descclassname">pyETT.ett.</code><code class="sig-name descname">Tournament</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">players</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyETT/ett.html#Tournament"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyETT.ett.Tournament" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A Class to handle ETT official tournaments</p>
+<dl class="py method">
+<dt id="pyETT.ett.Tournament.get_official_tournament_leaderboard_dataframe">
+<code class="sig-name descname">get_official_tournament_leaderboard_dataframe</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="reference internal" href="_modules/pyETT/ett.html#Tournament.get_official_tournament_leaderboard_dataframe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyETT.ett.Tournament.get_official_tournament_leaderboard_dataframe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a pandas dataframe with the leaderboard of the Eleven official tournaments
+available at <a class="reference external" href="http://lavadesignstudio.co.uk/eleven-rankings/">http://lavadesignstudio.co.uk/eleven-rankings/</a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyETT.ett.Tournament.qualify">
+<code class="sig-name descname">qualify</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">elo_min</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">start</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">end</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="reference internal" href="_modules/pyETT/ett.html#Tournament.qualify"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyETT.ett.Tournament.qualify" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implements logic to enter or qualify to ETT’s official monthly tournament.
+Players with an Elo rating exceeding <code class="docutils literal notranslate"><span class="pre">elo_min</span></code> at any point
+between <code class="docutils literal notranslate"><span class="pre">start</span></code> and <code class="docutils literal notranslate"><span class="pre">end</span></code> date have direct entry to the tournament.
+Otherwise, they can enter a Qualifying Tournament to try and qualify.
+This method returns a dataframe indicating which players have direct entry
+or can qualify.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>elo_min</strong> (<em>float</em>) – Elo threshold to have direct entry to the Tournament.</p></li>
+<li><p><strong>start</strong> (<em>str</em>) – Start date (YYYY-MM-DD)</p></li>
+<li><p><strong>end</strong> (<em>str</em>) – End date (YYYY-MM-DD)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Data frame of players with the following information:</dt><dd><ul class="simple">
+<li><p>mean: Player’s mean Elo between <code class="docutils literal notranslate"><span class="pre">start</span></code> and <code class="docutils literal notranslate"><span class="pre">end</span></code></p></li>
+<li><p>min: Player’s min Elo between <code class="docutils literal notranslate"><span class="pre">start</span></code> and <cite>end`</cite></p></li>
+<li><p>max: Player’s max Elo between <code class="docutils literal notranslate"><span class="pre">start</span></code> and <cite>end`</cite></p></li>
+<li><p>direct_entry: Boolean indicating whether player have direct entry to the Tournament</p></li>
+<li><p>can_qualify: Boolean indicating whether player can enter Qualifying Tournament</p></li>
+<li><p>id: Player’s id</p></li>
+<li><p>name: Player’s username</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -336,6 +437,11 @@ Otherwise, it returns a list of players whose usernames is a perfect match with 
 <dl class="py function">
 <dt id="pyETT.ett_parser.get_matches">
 <code class="sig-prename descclassname">pyETT.ett_parser.</code><code class="sig-name descname">get_matches</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user_id</span></em>, <em class="sig-param"><span class="n">unranked</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; List<a class="reference internal" href="_modules/pyETT/ett_parser.html#get_matches"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyETT.ett_parser.get_matches" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="pyETT.ett_parser.get_matchup">
+<code class="sig-prename descclassname">pyETT.ett_parser.</code><code class="sig-name descname">get_matchup</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user_id1</span></em>, <em class="sig-param"><span class="n">user_id2</span></em><span class="sig-paren">)</span> &#x2192; Iterator<a class="reference internal" href="_modules/pyETT/ett_parser.html#get_matchup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyETT.ett_parser.get_matchup" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
