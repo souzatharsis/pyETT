@@ -53,3 +53,7 @@ Diffs compared to official Elo: different rounding, ignores manual elo change by
 
 https://jzyrobert.github.io/eleven-stats/
 
+
+## Misc
+
+- [ ] Predict match outcome based on match history: https://discord.com/channels/340715434099605515/581688710093996032/860572395009212456
