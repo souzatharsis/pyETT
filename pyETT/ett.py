@@ -380,16 +380,9 @@ class Tournament:
     A Class to handle ETT official tournaments
     """
 
-    def __init__(self, players=None):
+    def __init__(self):
         self.players = list(filter(None, players))
         self.size = len(self.players)
-
-    def get_official_tournament_leaderboard_dataframe(self) -> pd.DataFrame:
-        """
-        Returns a pandas dataframe with the leaderboard of the Eleven official tournaments
-        available at http://lavadesignstudio.co.uk/eleven-rankings/.
-        """
-        return ett_parser.get_leaderboard_official_tournament()[0]
 
     def qualify(self, elo_min: float, start: str, end: str) -> pd.DataFrame:
         """Implements logic to enter or qualify to ETT's official monthly tournament.
@@ -459,3 +452,11 @@ class Tournament:
         }
 
         return pd.concat([monthly_stats, pd.DataFrame(data=d)], ignore_index=True)
+
+
+def get_official_tournament_leaderboard_dataframe() -> pd.DataFrame:
+    """
+    Returns a pandas dataframe with the leaderboard of the Eleven official tournaments
+    available at http://lavadesignstudio.co.uk/eleven-rankings/.
+    """
+    return ett_parser.get_leaderboard_official_tournament()[0]
