@@ -22,12 +22,12 @@ setup(
     license=license,
     packages=find_packages(exclude=["contrib", "docs", "tests"]),
     install_requires=[
-        requests==2.22.0,
-	pandas==1.3.0,
-	nbsphinx==0.8.6,
-	aiohttp==3.6.2,
-	lxml,
-	pandas_stubs==1.1.0.12,
-	nest_asyncio==1.5.1
+       "requests==2.22.0",
+	"pandas==1.3.0",
+	"nbsphinx==0.8.6",
+	"aiohttp==3.6.2",
+	"lxml",
+	"pandas_stubs==1.1.0.12",
+	"nest_asyncio==1.5.1"
     ],
 )
