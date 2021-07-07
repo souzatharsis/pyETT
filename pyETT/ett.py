@@ -380,7 +380,7 @@ class Tournament:
     A Class to handle ETT official tournaments
     """
 
-    def __init__(self, players):
+    def __init__(self, players=None):
         self.players = list(filter(None, players))
         self.size = len(self.players)
 
