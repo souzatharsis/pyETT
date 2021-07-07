@@ -87,8 +87,7 @@ class CohortTesting(TestCase):
 
 class TournamentTesting(TestCase):
     def test_get_official_tournament_leaderboard_dataframe(self):
-        tournament = ett.Tournament()
-        leaderboard = tournament.get_official_tournament_leaderboard_dataframe()
+        leaderboard = ett.official_tournament_leaderboard_dataframe()
 
         self.assertTrue(leaderboard.shape[0] > 0)
 

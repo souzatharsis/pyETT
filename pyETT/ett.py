@@ -454,7 +454,7 @@ class Tournament:
         return pd.concat([monthly_stats, pd.DataFrame(data=d)], ignore_index=True)
 
 
-def get_official_tournament_leaderboard_dataframe() -> pd.DataFrame:
+def official_tournament_leaderboard_dataframe() -> pd.DataFrame:
     """
     Returns a pandas dataframe with the leaderboard of the Eleven official tournaments
     available at http://lavadesignstudio.co.uk/eleven-rankings/.
