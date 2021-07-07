@@ -16,10 +16,10 @@ jobs:
       fail-fast: false
     steps:
     - uses: actions/checkout@v2
-    - name: Set up Python 3.8.5
+    - name: Set up Python 3.8.10
       uses: actions/setup-python@v2
       with:
-        python-version: '3.8.5'
+        python-version: '3.8.10'
     - name: Cache pip
       uses: actions/cache@v2
       with:
