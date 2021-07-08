@@ -1,9 +1,5 @@
 ## TODO
 
-### Modules
-
-- [ ] Add player analytics module; bump minor version to v0.2
-
 ### Functions / params
 
 - [ ] Add filter for match status
@@ -43,6 +39,8 @@
 
 ### Elo Analysis
 
+- [ ] Add Elo analysis per player and in cohort
+
 https://colab.research.google.com/drive/1nIJCtDUWQFtFPjIRs_7_yox6uK3V3SUC?usp=sharing
 
 `float K = (float)(32f * (2f - 1f / (Math.Pow(2.0, (double)(n - 1)))));`
@@ -57,3 +55,6 @@ https://jzyrobert.github.io/eleven-stats/
 ## Misc
 
 - [ ] Predict match outcome based on match history: https://discord.com/channels/340715434099605515/581688710093996032/860572395009212456
+- [ ] Update ett-monthly app with new Tournament class
+
+
