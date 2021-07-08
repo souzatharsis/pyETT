@@ -449,8 +449,8 @@ class Tournament:
             "mean": [1500] * n,
             "min": [1500] * n,
             "max": [1500] * n,
-            "direct_entry": [0] * n,
-            "can_qualify": [1] * n,
+            "direct_entry": [False] * n,
+            "can_qualify": [True] * n,
             "id": ids_without_elo,
             "name": [p.name for p in p_without_elo],
         }
