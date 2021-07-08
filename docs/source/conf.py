@@ -23,7 +23,7 @@ copyright = "2021, Tharsis T. P. Souza"
 author = "Tharsis T. P. Souza"
 
 # The full version, including alpha/beta/rc tags
-release = "0.2.0"
+release = "0.2.1"
 
 
 # -- General configuration ---------------------------------------------------

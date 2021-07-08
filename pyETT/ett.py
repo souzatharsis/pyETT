@@ -5,6 +5,7 @@ from typing import List, Optional, Union
 from functools import reduce
 from itertools import combinations
 import pandas as pd
+import numpy as np
 
 pd.options.mode.chained_assignment = None
 
@@ -267,6 +268,7 @@ class Cohort:
         """
         Returns cohort's players in a dataframe
         """
+
         return pd.DataFrame([vars(u) for u in self.players if u is not None]).dropna(
             how="all", axis="columns"
         )
@@ -367,9 +369,11 @@ class Cohort:
             .sort_values(by=["win_rate_ranked"], ascending=False)
         )
         cohort_stats["id"] = [p.id for p in cohort_stats["index"]]
+        cohort_players = self.players_dataframe()[["id", "elo", "rank"]]
+        cohort_players["id"] = cohort_players["id"].astype(np.int64)
 
         return cohort_stats.merge(
-            self.players_dataframe()[["id", "elo", "rank"]],
+            cohort_players,
             left_on="id",
             right_on="id",
         ).drop(columns=["id"])
