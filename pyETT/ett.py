@@ -506,7 +506,7 @@ def print_match(match: Match):
 
     Args:
         match (Match): A match.
-    """    
+    """
     print(f"Match #{match.id} : {match.created_at}\n")
     home_elo_sign = (-1) ** match.winning_team
     df = pd.DataFrame(
