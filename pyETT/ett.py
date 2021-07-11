@@ -32,7 +32,7 @@ class Player:
         return instance
 
     def __init__(self, user_id, player=None, legacy_api=False):
-        self.id = user_id
+        self.id = np.int64(user_id)
         if player is not None:
             self.name = player["user-name"] if legacy_api else player["username"]
             self.elo = player["elo"]
@@ -46,13 +46,13 @@ class Player:
         return self.name
 
     def __hash__(self):
-        return self.id
+        return int(self.id)
 
     def __lt__(self, other):
         return self.elo < other.elo
 
     def __eq__(self, other):
-        return self.id == other.id
+        return np.int64(self.id) == np.int64(other.id)
 
     def get_friends(self) -> List["Player"]:
         """
@@ -91,13 +91,43 @@ class Player:
             matches = self.matches
         return matches
 
-    def get_matches_dataframe(self, unranked=False) -> pd.DataFrame:
+    def get_matches_dataframe(self, unranked: bool = False) -> pd.DataFrame:
         """
         Return player’s matches in a pandas dataframe.
         """
         return pd.DataFrame(
             [vars(m) for m in self.get_matches(unranked) if m is not None]
         )
+
+    def get_matches_revertible(self) -> List[np.int64]:
+        """Returns player's lost matches that are eligible to be reverted/cancelled.
+        If you have an incomplete match because of connection issues or because your opponent left in the middle of the play,
+        you can request an Eleven Moderator (Discord) to revert/cancel the match and hence update your Elo rating.
+
+        Returns:
+            List[np.int64]: List of matches ids that are eligible to be reverted/cancelled.
+        """
+        m = self.get_matches_dataframe()
+        m["number_of_played_rounds"] = m["home_score"] + m["away_score"]
+        m["winner"] = m["home_player"]
+        m.loc[m["winning_team"] == 1, "winner"] = m.loc[
+            m["winning_team"] == 1, "away_player"
+        ]
+        m_incomplete = m.loc[
+            ((m["ranked"]) & (m["winner"] != self))
+            & ((m["state"] != 1) | (m["number_of_played_rounds"] < 2)),
+        ]
+
+        return list(m_incomplete.id.values)
+
+    def print_matches_revertible(self):
+        """Pretty print player's lost matches that are eligible to be reverted/cancelled.
+        If you have an incomplete match because of connection issues or because your opponent left in the middle of the play,
+        you can request an Eleven Moderator (Discord) to revert/cancel the match and hence update your Elo rating
+        """
+        m_incomplete_id_values = self.get_matches_revertible()
+
+        [print_match(m) for m in self.get_matches() if m.id in m_incomplete_id_values]
 
     def get_elo_history(self) -> pd.DataFrame:
         """
@@ -137,7 +167,7 @@ class Match:
         """
 
         def __init__(self, round_attributes):
-            self.id = round_attributes["id"]
+            self.id = np.int64(round_attributes["id"])
             self.round_number = round_attributes["round-number"]
             self.state = round_attributes["state"]
             self.away_score = round_attributes["away-score"]
@@ -147,7 +177,7 @@ class Match:
 
     def __init__(self, match_id, match):
         self.created_at = match["created-at"]
-        self.id = match_id
+        self.id = np.int64(match_id)
 
         self.ranked = match["ranked"]
         self.number_of_rounds = match["number-of-rounds"]
@@ -156,6 +186,7 @@ class Match:
         self.losing_team = match["losing-team"]
         self.home_score = match["home-score"]
         self.away_score = match["away-score"]
+        self.elo_change = match["elo-change"]
 
         home_player_index = 0 if match["players"][0]["team"] == Player.HOME else 1
         self.home_player = Player(
@@ -167,7 +198,10 @@ class Match:
             match["players"][1 - home_player_index],
         )
 
-        self.rounds = [self.Round(r) for r in match["rounds"]]
+        self.rounds = [self.Round(r) for r in match["rounds"]][::-1]
+
+    def print(self):
+        print_match(self)
 
     # Keeping inside Match for organizational / readability purposes even though it's a static method.
     def get_rounds_dataframe(rounds: List["Round"]) -> pd.DataFrame:  # type: ignore
@@ -178,6 +212,7 @@ class Match:
         Returns:
             pd.DataFrame: Dataframe with rounds, one per row.
         """
+        # I reverse the list because rounds come in reverse order from the web api for some reason
         return pd.DataFrame([vars(r) for r in rounds if r is not None])
 
 
@@ -370,7 +405,7 @@ class Cohort:
         )
         cohort_stats["id"] = [p.id for p in cohort_stats["index"]]
         cohort_players = self.players_dataframe()[["id", "elo", "rank"]]
-        cohort_players["id"] = cohort_players["id"].astype(np.int64)
+        # cohort_players["id"] = cohort_players["id"].astype(np.int64)
 
         return cohort_stats.merge(
             cohort_players,
@@ -464,3 +499,29 @@ def official_tournament_leaderboard_dataframe() -> pd.DataFrame:
     available at http://lavadesignstudio.co.uk/eleven-rankings/.
     """
     return ett_parser.get_leaderboard_official_tournament()[0]
+
+
+def print_match(match: Match):
+    """Pretty print a match with rounds.
+
+    Args:
+        match (Match): A match.
+    """    
+    print(f"Match #{match.id} : {match.created_at}\n")
+    home_elo_sign = (-1) ** match.winning_team
+    df = pd.DataFrame(
+        {
+            "USERNAME": [match.home_player.name, match.away_player.name],
+            "ELO +-": [
+                home_elo_sign * match.elo_change,
+                -home_elo_sign * match.elo_change,
+            ],
+            "MATCH SCORE": [match.home_score, match.away_score],
+        }
+    )
+    df_rounds = Match.get_rounds_dataframe(match.rounds)
+    for index2, row2 in df_rounds.iterrows():
+        round_index = int(index2) + 1
+        df[f"ROUND {round_index}"] = [row2["home_score"], row2["away_score"]]
+    print(df)
+    print("\n")

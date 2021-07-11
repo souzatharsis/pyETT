@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>pyETT package &mdash; pyETT 0.2.3 documentation</title>
+  <title>pyETT package &mdash; pyETT 0.2.4 documentation</title>
   
 
   
@@ -312,6 +312,11 @@ Otherwise, it returns a list of players whose usernames is a perfect match with 
 </dl>
 </dd></dl>
 
+<dl class="py method">
+<dt id="pyETT.ett.Match.print">
+<code class="sig-name descname">print</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyETT/ett.html#Match.print"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyETT.ett.Match.print" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 <dl class="py class">
@@ -355,8 +360,32 @@ Otherwise, it returns a list of players whose usernames is a perfect match with 
 
 <dl class="py method">
 <dt id="pyETT.ett.Player.get_matches_dataframe">
-<code class="sig-name descname">get_matches_dataframe</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">unranked</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="reference internal" href="_modules/pyETT/ett.html#Player.get_matches_dataframe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyETT.ett.Player.get_matches_dataframe" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_matches_dataframe</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">unranked</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="reference internal" href="_modules/pyETT/ett.html#Player.get_matches_dataframe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyETT.ett.Player.get_matches_dataframe" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return player’s matches in a pandas dataframe.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyETT.ett.Player.get_matches_revertible">
+<code class="sig-name descname">get_matches_revertible</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>numpy.int64<span class="p">]</span><a class="reference internal" href="_modules/pyETT/ett.html#Player.get_matches_revertible"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyETT.ett.Player.get_matches_revertible" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns player’s lost matches that are eligible to be reverted/cancelled.
+If you have an incomplete match because of connection issues or because your opponent left in the middle of the play,
+you can request an Eleven Moderator (Discord) to revert/cancel the match and hence update your Elo rating.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>List of matches ids that are eligible to be reverted/cancelled.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>List[np.int64]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyETT.ett.Player.print_matches_revertible">
+<code class="sig-name descname">print_matches_revertible</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyETT/ett.html#Player.print_matches_revertible"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyETT.ett.Player.print_matches_revertible" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pretty print player’s lost matches that are eligible to be reverted/cancelled.
+If you have an incomplete match because of connection issues or because your opponent left in the middle of the play,
+you can request an Eleven Moderator (Discord) to revert/cancel the match and hence update your Elo rating</p>
 </dd></dl>
 
 </dd></dl>
@@ -411,6 +440,17 @@ or can qualify.</p>
 <code class="sig-prename descclassname">pyETT.ett.</code><code class="sig-name descname">official_tournament_leaderboard_dataframe</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="reference internal" href="_modules/pyETT/ett.html#official_tournament_leaderboard_dataframe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyETT.ett.official_tournament_leaderboard_dataframe" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a pandas dataframe with the leaderboard of the Eleven official tournaments
 available at <a class="reference external" href="http://lavadesignstudio.co.uk/eleven-rankings/">http://lavadesignstudio.co.uk/eleven-rankings/</a>.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="pyETT.ett.print_match">
+<code class="sig-prename descclassname">pyETT.ett.</code><code class="sig-name descname">print_match</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">match</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#pyETT.ett.Match" title="pyETT.ett.Match">pyETT.ett.Match</a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyETT/ett.html#print_match"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyETT.ett.print_match" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pretty print a match with rounds.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>match</strong> (<a class="reference internal" href="#pyETT.ett.Match" title="pyETT.ett.Match"><em>Match</em></a>) – A match.</p>
+</dd>
+</dl>
 </dd></dl>
 
 </div>

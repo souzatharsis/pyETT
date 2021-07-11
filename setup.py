@@ -13,7 +13,7 @@ with open("LICENSE.md") as f:
 
 setup(
     name="pyETT",
-    version="0.2.3",
+    version="0.2.4",
     description="Python library for Eleven VR Table Tennis data",
     long_description=readme,
     long_description_content_type="text/markdown",

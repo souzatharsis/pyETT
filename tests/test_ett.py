@@ -64,7 +64,7 @@ class MatchTesting(TestCase):
         matches = player.get_matches_dataframe()
         rounds = ett.Match.get_rounds_dataframe(
             rounds=matches.loc[
-                matches["id"] == "9866478",
+                matches["id"] == 9866478,
             ].rounds.values[0]
         )
 
