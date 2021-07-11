@@ -33,11 +33,9 @@
 :heavy_check_mark: Add enum for states variables
 
 
-## Analytics Module
+## Analytics
 
-### Cohort Analysis
-
-### Elo Analysis
+:heavy_check_mark: Cohort Analysis
 
 - [ ] Add Elo analysis per player and in cohort
 
@@ -47,14 +45,14 @@ https://colab.research.google.com/drive/1nIJCtDUWQFtFPjIRs_7_yox6uK3V3SUC?usp=sh
 
 Diffs compared to official Elo: different rounding, ignores manual elo change by mods, no 24 hour decay
 
-### Player Analytics
-
-https://jzyrobert.github.io/eleven-stats/
+- [ ] Player Analytics https://jzyrobert.github.io/eleven-stats/
 
 
 ## Misc
 
 - [ ] Predict match outcome based on match history: https://discord.com/channels/340715434099605515/581688710093996032/860572395009212456
-- [ ] Update ett-monthly app with new Tournament class
+
+:heavy_check_mark: Update ett-monthly app with new Tournament class
 
 
+{"mode":"full","isActive":false}
