@@ -53,6 +53,3 @@ Diffs compared to official Elo: different rounding, ignores manual elo change by
 - [ ] Predict match outcome based on match history: https://discord.com/channels/340715434099605515/581688710093996032/860572395009212456
 
 :heavy_check_mark: Update ett-monthly app with new Tournament class
-
-
-{"mode":"full","isActive":false}
