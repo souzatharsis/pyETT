@@ -4,7 +4,7 @@
 
 - [ ] Add filter for match status
 
-- [ ] Find matches eligle for revertion
+:heavy_check_mark: Find matches eligle for revertion
 
 :heavy_check_mark: Cohort Analysis
 
@@ -16,7 +16,7 @@
 
 ### Documentation
 
-- [ ] Add Changelog
+- [ ] Add Changelog to docs
 
 :heavy_check_mark: Add Docstrings
 
