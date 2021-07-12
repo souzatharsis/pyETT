@@ -2,6 +2,7 @@
 
 [![PyPi Status](https://img.shields.io/pypi/v/pyETT)](https://pypi.org/project/pyETT/)
 [![Downloads](https://pepy.tech/badge/pyett)](https://pepy.tech/project/pyett)
+[![CodeFactor](https://www.codefactor.io/repository/github/souzatharsis/pyett/badge)](https://www.codefactor.io/repository/github/souzatharsis/pyett)
 [![Documentation Status](https://readthedocs.org/projects/pyett/badge/?version=latest)](https://pyett.readthedocs.io/en/latest/?badge=latest)
 [![Build](https://img.shields.io/github/workflow/status/souzatharsis/pyETT/pyett-tests)](https://github.com/souzatharsis/pyETT/actions)
 [![Issues](https://img.shields.io/github/issues-raw/souzatharsis/pyETT)](https://github.com/souzatharsis/pyETT/issues)
