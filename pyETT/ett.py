@@ -78,9 +78,7 @@ class Player:
         )
 
     def get_matches(self, unranked: bool = False) -> List["Match"]:
-        """
-        Return player’s matches.
-        """
+        """Return player’s matches."""
         if self.matches is None:
             res = ett_parser.get_matches(self.id, unranked)
             if not res:
@@ -130,8 +128,10 @@ class Player:
         [print_match(m) for m in self.get_matches() if m.id in m_incomplete_id_values]
 
     def get_elo_history(self) -> pd.DataFrame:
-        """
-        Returns player’s elo score history.
+        """Returns player’s elo score history.
+
+        Returns:
+            pd.DataFrame: [description]
         """
         if self.elo_history is None:
             res = ett_parser.get_elo_history(self.id)
@@ -201,6 +201,7 @@ class Match:
         self.rounds = [self.Round(r) for r in match["rounds"]][::-1]
 
     def print(self):
+        """Pretty-print match's information"""
         print_match(self)
 
     # Keeping inside Match for organizational / readability purposes even though it's a static method.
@@ -224,10 +225,16 @@ class ETT:
     def __init__(self):
         self.leaderboard = None
 
-    def user_search(self, username, perfect_match=False) -> List[Player]:
-        """
-        Returns a list of players whose name contains username, if perfect_match is False.
-        Otherwise, it returns a list of players whose usernames is a perfect match with username.
+    def user_search(self, username: str, perfect_match: bool = False) -> List[Player]:
+        """Returns a list of players whose name contains ``username``, if ``perfect_match`` is False.
+        Otherwise, it returns a list of players whose username is a perfect match with ``username``.
+
+        Args:
+            username (str): Username
+            perfect_match (bool, optional): Whether to perform perfect match in string matching. Defaults to False.
+
+        Returns:
+            List[Player]: List of players whose names match with `username`.
         """
         res = ett_parser.user_search(username)
 
@@ -250,9 +257,15 @@ class ETT:
     def user_search_dataframe(
         self, username: str, perfect_match: bool = False
     ) -> pd.DataFrame:
-        """
-        Returns a list of players whose name contains username, if perfect_match is False.
+        """Returns a list of players whose name contains username, if perfect_match is False.
         Otherwise, it returns a list of players whose usernames is a perfect match with username.
+
+        Args:
+            username (str): Username
+            perfect_match (bool, optional): Whether to perform perfect match in string matching. Defaults to False.
+
+        Returns:
+            pd.DataFrame: A dataframe of players whose names match with `username`.
         """
         return pd.DataFrame(
             [
@@ -263,8 +276,13 @@ class ETT:
         ).dropna(how="all", axis="columns")
 
     def get_leaderboard(self, num_players=10) -> List[Player]:
-        """
-        Returns a list of players from the leaderboard.
+        """Returns a list of players from the leaderboard.
+
+        Args:
+            num_players (int, optional): Max number of players to return. Defaults to 10.
+
+        Returns:
+            List[Player]: Top players in ETT's leaderboard.
         """
         if self.leaderboard is None:
             res = ett_parser.get_leaderboard(num_players)
@@ -277,8 +295,13 @@ class ETT:
         return self.leaderboard
 
     def get_leaderboard_dataframe(self, num_players: int = 10) -> pd.DataFrame:
-        """
-        Returns a pandas dataframe with players from the leaderboard.
+        """Returns a pandas dataframe with players from the leaderboard.
+
+        Args:
+            num_players (int, optional): Max number of players to return. Defaults to 10.
+
+        Returns:
+            pd.DataFrame: Top players in ETT's leaderboard.
         """
         lb = pd.DataFrame(
             [vars(u) for u in self.get_leaderboard(num_players) if u is not None]
@@ -325,7 +348,9 @@ class Cohort:
             cohort_elo,
         ).ffill(axis=0)
 
-    def get_matches(self, unranked: bool = False) -> List["Match"]:
+    def get_matches(
+        self, unranked: bool = False
+    ) -> List["Match"]:  # TODO: filter unranked
         """
         Returns matches among players in the cohort
         """
@@ -494,9 +519,11 @@ class Tournament:
 
 
 def official_tournament_leaderboard_dataframe() -> pd.DataFrame:
-    """
-    Returns a pandas dataframe with the leaderboard of the Eleven official tournaments
+    """Returns a pandas dataframe with the leaderboard of the Eleven official tournaments
     available at http://lavadesignstudio.co.uk/eleven-rankings/.
+
+    Returns:
+        pd.DataFrame: A dataframe with the leaderboard of Eleven official tournaments.
     """
     return ett_parser.get_leaderboard_official_tournament()[0]
 
