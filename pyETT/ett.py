@@ -187,6 +187,9 @@ class Match:
         self.home_score = match["home-score"]
         self.away_score = match["away-score"]
         self.elo_change = match["elo-change"]
+        self.home_elo_avg = match["home-elo-avg"]
+        self.away_elo_avg = match["away-elo-avg"]
+        
 
         home_player_index = 0 if match["players"][0]["team"] == Player.HOME else 1
         self.home_player = Player(
@@ -275,7 +278,7 @@ class ETT:
             ]
         ).dropna(how="all", axis="columns")
 
-    def get_leaderboard(self, num_players=10) -> List[Player]:
+    def get_leaderboard(self, num_players: int = 10) -> List[Player]:
         """Returns a list of players from the leaderboard.
 
         Args:

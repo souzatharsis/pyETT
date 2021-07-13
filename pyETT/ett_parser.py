@@ -6,6 +6,7 @@ import requests
 import sys
 import aiohttp
 import asyncio
+import urllib.parse
 import pandas as pd
 
 import nest_asyncio  # type: ignore
@@ -137,6 +138,8 @@ def get_matchup(user_id1, user_id2) -> Iterator:
 
     for match_data in res:
         match = match_data["attributes"]
+        match["home-elo-avg"] = match.pop("home-elo")
+        match["away-elo-avg"] = match.pop("away-elo")
         match["winning-team"] = match.pop("winner")
         match["losing-team"] = 1 - match["winning-team"]
 
@@ -213,6 +216,7 @@ def get_leaderboard_official_tournament() -> List:
 
 
 def user_search(username) -> List:
+    username = urllib.parse.quote(username)
     async def request_user(session, url):
         async with session.get(url) as resp:
             user_page = await resp.json()
