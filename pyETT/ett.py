@@ -189,7 +189,6 @@ class Match:
         self.elo_change = match["elo-change"]
         self.home_elo_avg = match["home-elo-avg"]
         self.away_elo_avg = match["away-elo-avg"]
-        
 
         home_player_index = 0 if match["players"][0]["team"] == Player.HOME else 1
         self.home_player = Player(
@@ -422,12 +421,21 @@ class Cohort:
                 ("losses" + ranked_label): losses,
                 ("win_rate" + ranked_label): win_rate,
             }
-            return pd.DataFrame(frame).reset_index()
+
+            df_matches_stats = pd.DataFrame(frame)
+
+            if df_matches_stats.empty:
+                df_matches_stats = pd.DataFrame(
+                    0, index=self.players, columns=list(frame.keys())
+                )
+
+            return df_matches_stats.reset_index()
 
         ranked_stats = matches_stats(matches, ranked=True)
         all_stats = matches_stats(matches, ranked=False)
+
         cohort_stats = (
-            ranked_stats.merge(all_stats)
+            all_stats.merge(ranked_stats)
             .round(0)
             .sort_values(by=["win_rate_ranked"], ascending=False)
         )
