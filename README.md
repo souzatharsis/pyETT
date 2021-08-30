@@ -7,6 +7,7 @@
 [![Build](https://img.shields.io/github/workflow/status/souzatharsis/pyETT/pyett-tests)](https://github.com/souzatharsis/pyETT/actions)
 [![Issues](https://img.shields.io/github/issues-raw/souzatharsis/pyETT)](https://github.com/souzatharsis/pyETT/issues)
 [![Discord](https://img.shields.io/discord/340715434099605515)](https://discord.com/channels/340715434099605515/790264084473708575)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/python/black)
 [![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
 ![Eleven VR](https://cdn.akamai.steamstatic.com/steam/apps/488310/capsule_616x353.jpg)
