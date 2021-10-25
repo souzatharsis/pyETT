@@ -3,6 +3,7 @@
 ### Functions / params
 
 - [ ] Add filter for match status
+- [ ] Add online players: http://elevenlogcollector-env.js6z6tixhb.us-west-2.elasticbeanstalk.com/ElevenServerLiteSnapshot
 
 :heavy_check_mark: Find matches eligle for revertion
 
